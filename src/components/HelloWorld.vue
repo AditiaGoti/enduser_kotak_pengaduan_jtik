@@ -1,10 +1,16 @@
 <template>
-  <div class="hello mt-24">
-  <div class="text-left mx-32 mb-5">
-    
-<h1 class="mb-4 text-2xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-5">KOTAK PENGADUAN</span>JTIK</h1>
-<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
-
+  <div class="hello mt-16">
+  <div class="text-left mb-5 bg-emerald-600 rounded shadow py-6">
+    <div class="ml-36">
+<h1 class="mb-4 text-2xl font-extrabold text-gray-900 text-white md:text-2xl lg:text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-white from-sky-400 mr-2">KOTAK PENGADUAN</span>JTIK</h1>
+<p class="text-lg font-normal text-white lg:text-xl dark:text-gray-400 w-[500px]">Dengan Kotak Pengaduan JTIK, pengaduan Anda dapat langsung dibaca dan ditanggapi oleh role yang ditunjukan.</p>
+               <button
+              class="bg-white text-emerald-600 active:bg-emerald-800 text-xs font-bold uppercase px-4 py-2 my-3 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 mb-3 ease-linear transition-all duration-150"
+              type="button"
+            >
+              <i class="fas fa-arrow-alt-circle-down"></i> Buat Keluhan
+            </button>
+    </div>
   </div>
   <div class="flex flex-row">
   <div class="flex flex-col">
@@ -50,73 +56,155 @@
         </span>
     </button>
 </div>
-<div class="ml-32 mb-4 border-8 w-[700px]">
+<p class="font-bold text-2xl mb-2 underline decoration-2 text-left ml-32 "> Keluhan Pengguna </p>
+<div class="ml-32 mb-4 border-none w-[700px]">
   <div class="flex flex-row ">
       <img
-      :src="logo"
+      :src="Logo"
       class="w-64 h-48 m-4"
       />
-      <div class="flex flex-col">
-      <p class="text-left mt-3">
-        Judul Keluhan
+      <div class="flex flex-col py-3">
+      <p class="text-left font-bold text-lg mt-3 mb-1">Staff Akademik </p>
+      <p class="text-left  font-bold text-xl">
+        Susah Menyampaikan Pendapat
         </p>
-        <p class="text-left">
-        Isi keluhan 
+        <p class="text-justify mr-2 text-md mt-1 break-words whitespace-normal mb-1">Lorem ipsum dolor sit amet, 
+                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
+                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
+                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
+                             </p>
+        <div class="flex flex-row">
+         <p class="text-left text-sm mr-3">
+          13-04-2023
         </p>
-        <p class="text-left">
-        Kepada siapa keluhan ditunjukan 
+        <p class="text-left font-semibold text-sm">
+        Akademik 
         </p>
-         <p class="text-left">
-          Tanggal Pembuatan
-        </p>
+        <div class="flex justify-end">
+        <a href="#" class="inline-flex items-center ml-36 px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Read more
+            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a>
+        </div>
+        </div>
       </div>
   </div>
     </div>
-   <div class="ml-32 mb-4 border-8 w-[700px]">
+    <hr class="ml-32 font-bold w-[700px] mb-3" />
+    <div class="ml-32 mb-4 border-none w-[700px]">
   <div class="flex flex-row ">
       <img
-      :src="logo"
+      :src="Logo"
       class="w-64 h-48 m-4"
       />
-      <div class="flex flex-col">
-      <p class="text-left mt-3">
-        Judul Keluhan
+      <div class="flex flex-col py-3">
+      <p class="text-left font-bold text-lg mt-3 mb-1">Staff Akademik </p>
+      <p class="text-left  font-bold text-xl">
+        Susah Menyampaikan Pendapat
         </p>
-        <p class="text-left">
-        Isi keluhan 
+        <p class="text-justify mr-2 text-md mt-1 break-words whitespace-normal mb-1">Lorem ipsum dolor sit amet, 
+                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
+                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
+                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
+                             </p>
+        <div class="flex flex-row">
+         <p class="text-left text-sm mr-3">
+          13-04-2023
         </p>
-        <p class="text-left">
-        Kepada siapa keluhan ditunjukan 
+        <p class="text-left font-semibold text-sm">
+        Akademik 
         </p>
-         <p class="text-left">
-          Tanggal Pembuatan
-        </p>
+        <div class="flex justify-end">
+        <a href="#" class="inline-flex items-center ml-36 px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Read more
+            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a>
+        </div>
+        </div>
       </div>
   </div>
     </div>
-   
+    <hr class="ml-32 font-bold w-[700px] mb-3" />
   </div>
   <div class="flex flex-col">
-    <div class="border-8 w-64 h-48 mb-4">
+    <div class="border-none flex justify-center w-96 h-46">
+      <div class="flex flex-row">
+        <div>
       <img
-      :src="logo"
+      :src="Logo"
+      class="object-fill w-96 item-center"
       />
+        </div>
+        <div class="text-left w-full mt-5">
+            <p class="font-bold text-md mb-2"> Susah Menyampaikan Pendapat </p>
+            <p> Susah Menyampaikan Pendapat </p>
+        </div>
+      </div>
     </div>
-     <div class="border-8 w-64 h-48 mb-4">
+    <hr class="my-2 font-bold"/>
+       <div class="border-none flex justify-center w-96 h-46">
+      <div class="flex flex-row">
+        <div>
       <img
-      :src="logo"
+      :src="Logo"
+      class="object-fill w-96 item-center"
       />
+        </div>
+        <div class="text-left w-full mt-5">
+            <p class="font-bold text-md mb-2"> Susah Menyampaikan Pendapat </p>
+            <p> Susah Menyampaikan Pendapat </p>
+        </div>
+      </div>
     </div>
-     <div class="border-8 w-64 h-48 mb-4">
+        <hr class="my-2 font-bold"/>
+
+    <div class="border-none flex justify-center w-96 h-46">
+      <div class="flex flex-row">
+        <div>
       <img
-      :src="logo"
+      :src="Logo"
+      class="object-fill w-96 item-center"
       />
+        </div>
+        <div class="text-left w-full mt-5">
+            <p class="font-bold text-md mb-2"> Susah Menyampaikan Pendapat </p>
+            <p> Susah Menyampaikan Pendapat </p>
+        </div>
+      </div>
     </div>
-    <div class="border-8 w-64 h-48">
+        <hr class="my-2 font-bold"/>
+
+    <div class="border-none flex justify-center w-96 h-46">
+      <div class="flex flex-row">
+        <div>
       <img
-      :src="logo"
+      :src="Logo"
+      class="object-fill w-96 item-center"
       />
+        </div>
+        <div class="text-left w-full mt-5">
+            <p class="font-bold text-md mb-2"> Susah Menyampaikan Pendapat </p>
+            <p> Susah Menyampaikan Pendapat </p>
+        </div>
+      </div>
     </div>
+        <hr class="my-2 font-bold"/>
+
+    <div class="border-none flex justify-center w-96 h-46">
+      <div class="flex flex-row">
+        <div>
+      <img
+      :src="Logo"
+      class="object-fill w-96 item-center"
+      />
+        </div>
+        <div class="text-left w-full mt-5">
+            <p class="font-bold text-md mb-2"> Susah Menyampaikan Pendapat </p>
+            <p> Susah Menyampaikan Pendapat </p>
+        </div>
+      </div>
+    </div>
+           <hr class="my-2 font-bold"/>        
   </div>
   </div>
   </div>
@@ -151,8 +239,5 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>

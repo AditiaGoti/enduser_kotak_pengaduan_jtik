@@ -7,7 +7,7 @@
     <p class="font-extralight text-sm">Publish at : 13-04-2023, 11:59</p>
     <p class="mx-3 relative bottom-0.5 font-extralight"> | </p>
     <p class="font-extralight text-sm">Author : Anonym</p>
-    <p class="ml-3 font-bold text-md text-red-600	">Belum Ditanggapi</p>
+    <p class="ml-3 font-bold text-md">Sudah Ditanggapi</p>
     </div>
     <div class="flex flex-row">
     <p class="font-extralight text-sm"> Kategori :</p>
@@ -29,18 +29,11 @@
                              scelerisque. Dapibus semper eu est et non neque, sed. Massa, id nunc lectus 
                              , tortor. Non a, eget imperdiet proin turpis placerat. Sagittis donec 
                               feugiat orci dolor. </p>
-  </div>
+  </div>  
   <div class="px-10 text-left  py-3 ">
     <p class="font-bold text-lg underline underline-offset-8 mb-3"> TANGGAPAN</p>
     <div class="flex flex-col border-2 rounded-md bg-gray-100 px-2 py-3" >
- <p class="text-grey-200 text-md mt-1">Belum ada Tanggapan</p>
-                              </div>
-                              <br>
-    <div class="flex flex-col border-2 rounded-md bg-gray-100 px-2 py-3" >
-  <div class="text-md mt-1 ml-14 mb-3">
-<h1><span class="font-bold">Harap berhati-hati dalam memberi tanggapan.</span>Komentar yang sudah dikirim tidak dapat dihapus kembali.</h1>
-     </div>            
-            <div class="flex flex-row mx-10 mb-4 ">
+<div class="flex flex-row">
     <div>
       <img
                 :src="Logo"
@@ -48,18 +41,22 @@
                 alt="..."
               />
     </div>
-    <div class="ml-3 mt-1">
-        
-<label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
-<textarea id="message" rows="4" class="mb-2 block p-2.5 w-[800px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-<p >Dengan mengirim tanggapan, Anda menerima syarat dan ketentuan serta kebijakan privasi Kotak Pengaduan JTIK </p>
+    <div class="ml-3 mt-3">
+        <p class="font-bold text-lg ">PIHAK PENANGGAP</p>
     </div>
-            </div>
-            <div class="flex justify-end ">
-            <button type="button" class="w-44 mr-12  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Kirim Tanggapan</button>
-            </div>
-    </div>
-  </div>   
+</div>
+ <p class="text-left px-10 text-md mt-1">Lorem ipsum dolor sit amet, 
+                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
+                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
+                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
+                            Nulla eu commodo in odio aenean sit amet mattis. Purus massa velit sapien 
+                            fermentum non amet, amet ac. Magnis mattis egestas lobortis elementum elit 
+                            ut rhoncus. Viverra vivamus condimentum nisl erat lobortis dictum risus
+                             scelerisque. Dapibus semper eu est et non neque, sed. Massa, id nunc lectus 
+                             , tortor. Non a, eget imperdiet proin turpis placerat. Sagittis donec 
+                              feugiat orci dolor. </p>
+                              </div>
+  </div> 
   <div class="px-10 text-left">
     <p class="font-bold text-lg underline underline-offset-8 mb-3"> Komentar</p>
   <div>
