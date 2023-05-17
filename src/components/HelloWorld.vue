@@ -60,7 +60,7 @@
  <router-link
         to="/detail"
         >
-<div class="ml-32 mb-4 border-none w-[700px]">
+<div class="ml-32 mb-4 border-none w-[700px] hover:bg-gray-100">
   <div class="flex flex-row ">
       <img
       :src="Logo"
@@ -99,7 +99,7 @@
     </div>
  </router-link>
     <hr class="ml-32 font-bold w-[700px] mb-3" />
-    <div class="ml-32 mb-4 border-none w-[700px]">
+    <div class="ml-32 mb-4 border-none w-[700px] hover:bg-gray-100">
       <router-link
         to="/detail"
         >
@@ -143,7 +143,7 @@
     <hr class="ml-32 font-bold w-[700px] mb-3" />
   </div>
   <div class="flex flex-col">
-    <div class="border-none flex justify-center w-96 h-46">
+    <div class="border-none flex justify-center w-96 h-46 hover:bg-gray-100">
       <router-link to="/detailtanggapan">
       <div class="flex flex-row">
         <div>
@@ -160,9 +160,9 @@
       </router-link>
     </div>
     <hr class="my-2 font-bold"/>
-       <div class="border-none flex justify-center w-96 h-46 hover:bg-gray-200 z-10">
+       <div class="border-none flex justify-center w-96 h-46 ">
         <router-link to="/detailtanggapan">
-      <div class="flex flex-row">
+      <div class="flex flex-row hover:bg-gray-200 z-0">
         <div>
       <img
       :src="Logo"
