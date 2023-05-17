@@ -31,6 +31,9 @@
       >
        
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+          <router-link
+        to="/buatkeluhan"
+        >
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
@@ -42,7 +45,7 @@
               Buat Keluhan
             </a>
           </li>
-
+</router-link>
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
@@ -103,7 +106,9 @@
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
           <li>
+            <router-link to="/profile">
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+            </router-link>
           </li>
           <li>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
