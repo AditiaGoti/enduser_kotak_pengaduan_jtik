@@ -6,7 +6,15 @@ import profile from '../views/Profile.vue'
 import editprofile from '../views/EditProfile.vue'
 import changepass from '../views/ChangePassword.vue'
 import CreateComplaint from '../views/BuatKeluhan.vue'
+import LoginUser from '../views/LoginUser.vue'
+import ResetPass from '../views/ResetPassword.vue'
+import Keluhan from '../views/Keluhan.vue'
 const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginUser
+  },
   {
     path: '/',
     name: 'home',
@@ -38,9 +46,19 @@ const routes = [
     component: changepass
   },
   {
+    path: '/resetpassword',
+    name: 'resetpassword',
+    component: ResetPass
+  },
+  {
     path: '/buatkeluhan',
     name: 'buatkeluhan',
     component: CreateComplaint
+  },
+  {
+    path: '/keluhan',
+    name: 'keluhan',
+    component: Keluhan
   },
   {
     path: '/about',

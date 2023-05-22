@@ -6,12 +6,12 @@
     <div class="flex flex-col items-center pb-10">
 <p class="font-bold text-lg mb-3"> Ganti Password </p>
 <form class="w-full">
-  <div class="mb-6 mx-2 flex flex-row">
+  <div class="mb-6 mx-2">
     <div>
     <label for="password" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white text-left">Password Lama</label>
-    <input type="password" id="passwordLama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+    <input type="password" id="passwordLama" placeholder="Input Password Lama" class="placeholder-blueGray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
     </div>
-    <div>
+    <!-- <div>
           <div
               class="
                 absolute
@@ -32,15 +32,15 @@
                 ></i
               ></span>
             </div>
-    </div>
+    </div> -->
 </div>
   <div class="mb-6 mx-2">
     <label for="password" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white text-left">Password Baru</label>
-    <input type="password" id="passwordLama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+    <input type="password" id="passwordBaru" placeholder="Input Password Baru" class="placeholder-blueGray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
   </div>
   <div class="mb-6 mx-2">
-    <label for="password" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white text-left">Password Lama</label>
-    <input type="password" id="passwordLama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+    <label for="password" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white text-left">Password Baru</label>
+    <input type="password" id="passwordReBaru" placeholder="Input Password Baru" class="placeholder-blueGray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
   </div>
 </form>
         <div class="flex mt-4 space-x-3 md:mt-6 mx-2">

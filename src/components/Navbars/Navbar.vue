@@ -8,13 +8,19 @@
       <div
         class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
       >
-        <router-link to="/">
+              <router-link to="/">
+       <div class="flex flex-row">
+        <div>
+              <img :src="vote" class="w-8 h-8 mr-1"/>
+        </div>
+        <div>
           <a
             class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-            href="#pablo"
           >
             KOTAK PENGADUAN JTIK
           </a>
+        </div>
+       </div>
         </router-link>
         <button
           class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
@@ -58,12 +64,14 @@
             </a>
           </li>
           <li class="flex items-center">
+            <router-link to="/login">
             <button
               class="bg-emerald-500 text-white active:bg-emerald-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
               type="button"
             >
               <i class="fas fa-arrow-alt-circle-down"></i> Masuk / Daftar
             </button>
+            </router-link>
           </li>
           <li class="flex items-center">
             
@@ -111,8 +119,15 @@
             </router-link>
           </li>
           <li>
+            <router-link to="/keluhan">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Complaint</a>
+            </router-link>
+          </li>
+          <router-link to="/">
+          <li>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
           </li>
+          </router-link>
         </ul>
       </div>
         <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
@@ -127,7 +142,12 @@
   </nav>
 </template>
 <script>
-
-export default ({
-})
+import vote from "@/assets/img/voting.png";
+export default {
+  data() {
+    return {
+      vote,
+    };
+  },
+};
 </script>
