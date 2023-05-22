@@ -22,7 +22,7 @@ export default {
   name: 'CreateComplaint',
   data(){
     return {
-        currentStep:0,
+        currentStep:1,
         steps: [
             {
                 component : ComplintPublish

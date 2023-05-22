@@ -52,6 +52,7 @@
             </a>
           </li>
 </router-link>
+          <router-link to="/tanggapan">
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
@@ -63,6 +64,7 @@
               Tanggapan
             </a>
           </li>
+          </router-link>
           <li class="flex items-center">
             <router-link to="/login">
             <button

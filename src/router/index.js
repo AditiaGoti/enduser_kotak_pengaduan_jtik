@@ -9,6 +9,7 @@ import CreateComplaint from '../views/BuatKeluhan.vue'
 import LoginUser from '../views/LoginUser.vue'
 import ResetPass from '../views/ResetPassword.vue'
 import Keluhan from '../views/Keluhan.vue'
+import Tanggapan from '../views/Tanggapan.vue'
 const routes = [
   {
     path: '/login',
@@ -59,6 +60,11 @@ const routes = [
     path: '/keluhan',
     name: 'keluhan',
     component: Keluhan
+  },
+  {
+    path: '/tanggapan',
+    name: 'tanggapan',
+    component: Tanggapan
   },
   {
     path: '/about',

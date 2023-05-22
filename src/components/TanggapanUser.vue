@@ -1,4 +1,6 @@
 <template>
+<div class="mt-24 px-36">  
+    <p class="font-sans text-2xl text-left font-bold mb-4 ">Tanggapan</p>
   <router-link
         to="/detailtanggapan"
         >
@@ -97,6 +99,7 @@
   </div>
       </router-link>
     </div>
+</div>
 </template>
 <script>
 import Logo from "@/assets/img/PENGADUAN.png";
