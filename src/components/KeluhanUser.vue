@@ -16,13 +16,14 @@
 <script>
 import ComplintPublish from "../components/Complaint/Publikasi.vue"
 import ComplaintResponded from "../components/Complaint/TanggapanKeluhan.vue"
+import { ComplaintController } from "@/controller/ComplaintController.js";
 
 
 export default {
   name: 'CreateComplaint',
   data(){
     return {
-        currentStep:1,
+        currentStep:0,
         steps: [
             {
                 component : ComplintPublish

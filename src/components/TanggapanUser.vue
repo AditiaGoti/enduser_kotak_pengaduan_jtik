@@ -1,119 +1,141 @@
 <template>
-<div class="mt-24 px-36">  
-    <p class="font-sans text-2xl text-left font-bold mb-4 ">Tanggapan</p>
-  <router-link
-        to="/detailtanggapan"
-        >
-<div class=" mb-4 border-none  hover:bg-gray-100">
-  <div class="flex flex-row ">
-      <img
-      :src="Logo"
-      class="w-64 h-48 m-4"
-      />
-      <div class="flex flex-col py-3">
-      <p class="text-left font-bold text-lg mt-3 mb-1">Staff Akademik </p>
-      <p class="text-left  font-bold text-xl">
-        Susah Menyampaikan Pendapat
-        </p>
-        <p class="text-justify mr-2 text-md mt-1 break-words whitespace-normal mb-1">Lorem ipsum dolor sit amet, 
-                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
-                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
-                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
-                             </p>
-        <div class="flex flex-row mb-1">
-         <p class="text-left text-sm mr-3">
-          13-04-2023
-        </p>
-        <p class="text-left font-semibold text-sm">
-        Akademik 
-        </p>
+  <div class="mt-24 px-36">
+    <p class="font-sans text-2xl text-left font-bold mb-4 underline">Tanggapan</p>
+    <div>
+      <div
+        v-if="publishedComplaints.length > 0"
+        v-for="complaint in publishedComplaints"
+        :key="complaint._id"
+        class="border-none flex flex-col h-46 hover:bg-gray-100"
+        @click="toComplaintDetail(complaint._id)"
+      >
+        <!-- Complaint content -->
+        <div class="flex flex-row">
+          <!-- Image -->
+          <div>
+            <img :src="complaint.attachmentImage" class="object-fill w-32 item-center" />
+          </div>
+          <!-- Text content -->
+          <div class="text-left w-64 ml-4">
+            <p class="font-bold text-2xl mb-2">{{ complaint.title }}</p>
+            <p class="mb-6">{{ truncateText(complaint.body, 50) }}</p>
+            <p class="text-xs font-extralight">{{ complaint.category }}</p>
+            <p class="text-blue-600 font-bold">{{ complaint.status }}</p>
+          </div>
         </div>
-        <p class="font-bold text-md text-left text-emerald-600">SUDAH DITANGGAPI</p>
+        <hr class="my-2 w-full font-bold" />
       </div>
-  </div>
-    </div>
- </router-link>
-    <hr class="font-bold mb-3" />
-    <div class="mb-4 border-none hover:bg-gray-100">
-      <router-link
-        to="/detailtanggapan"
-        >
-  <div class="flex flex-row ">
-      <img
-      :src="Logo"
-      class="w-64 h-48 m-4"
-      />
-      <div class="flex flex-col py-3">
-      <p class="text-left font-bold text-lg mt-3 mb-1">Staff Akademik </p>
-      <p class="text-left  font-bold text-xl">
-        Susah Menyampaikan Pendapat
-        </p>
-        <p class="text-justify mr-2 text-md mt-1 break-words whitespace-normal mb-1">Lorem ipsum dolor sit amet, 
-                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
-                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
-                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
-                             </p>
-        <div class="flex flex-row mb-1">
-         <p class="text-left text-sm mr-3">
-          13-04-2023
-        </p>
-        <p class="text-left font-semibold text-sm">
-        Akademik 
-        </p>
+      <div v-else>
+        <!-- No complaints message -->
+        <div class="flex justify-center border-none mt-36">
+          <div class="mb-4"><img :src="vote" class="w-32" alt="..." /></div>
         </div>
-        <p class="font-bold text-md text-left text-emerald-600">SUDAH DITANGGAPI</p>
-      </div>
-  </div>
-      </router-link>
-    </div>
-    <hr class="font-bold mb-3" />
-    <div class="mb-4 border-none hover:bg-gray-100">
-      <router-link
-        to="/detailtanggapan"
-        >
-  <div class="flex flex-row ">
-      <img
-      :src="Logo"
-      class="w-64 h-48 m-4"
-      />
-      <div class="flex flex-col py-3">
-      <p class="text-left font-bold text-lg mt-3 mb-1">Staff Akademik </p>
-      <p class="text-left  font-bold text-xl">
-        Susah Menyampaikan Pendapat
-        </p>
-        <p class="text-justify mr-2 text-md mt-1 break-words whitespace-normal mb-1">Lorem ipsum dolor sit amet, 
-                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
-                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
-                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
-                             </p>
-        <div class="flex flex-row mb-1">
-         <p class="text-left text-sm mr-3">
-          13-04-2023
-        </p>
-        <p class="text-left font-semibold text-sm">
-        Akademik 
-        </p>
+        <div class="mb-8 text-xl font-semibold text-black">
+          <p>Belum Memiliki Tanggapan</p>
         </div>
-        <p class="font-bold text-md text-left text-emerald-600">SUDAH DITANGGAPI</p>
       </div>
-  </div>
-      </router-link>
     </div>
-</div>
+  </div>
 </template>
+
 <script>
 import Logo from "@/assets/img/PENGADUAN.png";
+import { ComplaintController } from "@/controller/ComplaintController.js";
+import moment from "moment";
+import vote from "@/assets/img/voting.png";
+import { ProfileController } from "@/controller/ProfileController.js";
 
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
-  data()
-{
-  return{
-  Logo,
-  }
-}
-}
+  data() {
+    return {
+      moment: moment,
+      Logo,
+      vote,
+      meta: {
+        page: 1,
+        size: "",
+      },
+      complaint: new ComplaintController(false, false, ""),
+      Profile: new ProfileController(false,false,""),
+
+    };
+  },
+  computed: {
+    isError() {
+      return this.complaint.error;
+    },
+    ComplaintList() {
+      return this.complaint.lists;
+    },
+    errorCause() {
+      return this.complaint.errorCause;
+    },
+    isLoading() {
+      return this.complaint.loading;
+    },
+    profileList() {
+      return this.Profile.list;
+    },
+    // lecturerType() {
+    //   return this.profileList.lecturer_type; // Assuming you have the lecturer_type in the profileList
+    // },
+    publishedComplaints() {
+      return this.ComplaintList.filter(
+        (complaint) => complaint.status === "Responded"
+      );
+    },
+  },
+  mounted() {
+    this.getComplaint();
+    console.log(this.complaint, "complaint"); // Add this line to log the complaint data
+  },
+  methods: {
+    toComplaintDetail(Index) {
+      this.$router.push({
+        path: "/detail/:id",
+        name: "detail",
+        params: { id: Index },
+        item: "",
+      });
+    },
+    async getComplaintListLecturer(page, size) {
+      return this.complaint.getComplaintListLecturer(page, size);
+    },
+    async getComplaint() {
+      await this.getComplaintListLecturer(this.meta.page, this.meta.size);
+    },
+    async getProfileLecturer() {
+      return this.Profile.getProfileLecturer();
+    },
+    async profile() {
+      await this.getProfileLecturer();
+    },
+    truncateText(text, limit) {
+      if (text.split(" ").length > limit) {
+        const words = text.split(" ");
+        return words.slice(0, limit).join(" ") + "...";
+      }
+      return text;
+    },
+  },
+};
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+</style>

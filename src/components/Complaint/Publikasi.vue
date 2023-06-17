@@ -97,6 +97,7 @@
 </template>
 <script>
 import Logo from "@/assets/img/PENGADUAN.png";
+import { ComplaintController } from "@/controller/ComplaintController.js";
 
 export default {
   name: 'HelloWorld',
@@ -107,7 +108,38 @@ export default {
 {
   return{
   Logo,
+  complaintList:[],
+  complaint: new ComplaintController(false, false, ""),
   }
-}
-}
+},
+computed:{
+    isErrorComplaint() {
+        return this.complaint.error;
+      },
+      complaintList() {
+      return this.complaint.lists;
+    },
+      errorCauseComplaint() {
+        return this.complaint.errorCause;
+      },
+      isLoadingComplaint() {
+        return this.complaint.loading;
+      },
+  },
+  created() {
+    this.getComplaint();
+
+    },
+    mounted() {
+      this.getComplaint();
+    },
+  methods: {
+      async getComplaintList(id) {
+      return this.complaint.getComplaintList(id);
+    },
+    async getComplaint() {
+      await this.getComplaintList(this.$route.params.id);
+    }, 
+    },
+  }
 </script>

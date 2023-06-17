@@ -1,85 +1,106 @@
 <template>
-  <div class="hello mt-24 border-none mx-36">
+  <div class="hello mt-24 border-none mx-36 mb-10">
 <div class="flex flex-col">
   <div class="text-left mb-5 px-10 mt-3">
-    <p class="text-3xl font-bold"> Susah Menyampaikan Pendapat </p>
+    <p class="text-3xl font-bold text-black"> {{ComplaintDetail.title}} </p>
     <div class="flex flex-row py-3">
-    <p class="font-extralight text-sm">Publish at : 13-04-2023, 11:59</p>
+    <p class="font-extralight text-sm">Publish at : {{moment(ComplaintDetail.createdAt).locale("id").format("DD-MM-YYYY")}}</p>
     <p class="mx-3 relative bottom-0.5 font-extralight"> | </p>
-    <p class="font-extralight text-sm">Author : Anonym</p>
-    <p class="ml-3 font-bold text-md text-red-600	">Belum Ditanggapi</p>
+    <p class="font-extralight text-sm">Author : {{ ComplaintDetail.createdBy }}</p>
     </div>
-    <div class="flex flex-row">
-    <p class="font-extralight text-sm"> Kategori :</p>
-    <p class="font-bold text-sm">Akademik </p>
+    <div class="flex flex-row mb-3">
+    <p class="font-extralight text-sm"> Kategori : {{ ComplaintDetail.category }}</p>
+    <!-- <p class="font-bold text-sm">{{ComplaintDetail.lecturer_type}} </p> -->
     </div>
-    </div>
+    <div v-if="ComplaintDetail.status === 'Responded'">
+    <p class="font-bold text-md text-blue-600	">Sudah Ditanggapi</p>
+  </div>
+  <div v-else-if="ComplaintDetail.status === 'Moderated'">
+    <p class="font-bold text-md text-red-600	">Tanggapan Dalam Moderasi</p>
+  </div>
+  <div v-else>
+    <p class="font-bold text-md text-red-600	">Belum Ditanggapi</p>
+  </div>
+  </div>
     <hr class="mb-3 mx-10"/>
-    <div>
-    <img :src="Logo" class="object-cover h-[300px] w-[700px] justify-center mx-40 object-center border-4 mb-3 " alt="...">
-    </div>
+    <div class="flex justify-center border-none">
+  <div class="mb-8"><img :src="ComplaintDetail.attachmentImage" class="w-64" alt="..."></div>
+</div>
     <div class="mb-3"> 
-    <p class="text-left px-10 text-md mt-1 break-words whitespace-normal">Lorem ipsum dolor sit amet, 
-                          consectetur adipiscing elit. Faucibus velit, adipiscing senectus
-                           eget semper id. Pretium venenatis ridiculus ornare nec a, arcu aenean. 
-                            at scelerisque porta etiam consectetur varius. Arcu, quis sed dictum libero. 
-                            Nulla eu commodo in odio aenean sit amet mattis. Purus massa velit sapien 
-                            fermentum non amet, amet ac. Magnis mattis egestas lobortis elementum elit 
-                            ut rhoncus. Viverra vivamus condimentum nisl erat lobortis dictum risus
-                             scelerisque. Dapibus semper eu est et non neque, sed. Massa, id nunc lectus 
-                             , tortor. Non a, eget imperdiet proin turpis placerat. Sagittis donec 
-                              feugiat orci dolor. </p>
+    <p class="text-left px-10 text-md mt-1 break-words whitespace-normal">{{ ComplaintDetail.body }} </p>
   </div>
   <div class="px-10 text-left  py-3 ">
     <p class="font-bold text-lg underline underline-offset-8 mb-3"> TANGGAPAN</p>
-    <div class="flex flex-col border-2 rounded-md bg-gray-100 px-2 py-3" >
- <p class="text-grey-200 text-md mt-1">Belum ada Tanggapan</p>
+    <div class="flex flex-col border-2 rounded-md bg-gray-100 px-2 py-2 mb-3" >
+      <div v-if="feedbackList.length === 0">
+ <p class="text-grey-200 text-md mt-1 text-center">Belum ada Tanggapan</p>
                               </div>
-                              <br>
-    <div class="flex flex-col border-2 rounded-md bg-gray-100 px-2 py-3" >
-  <div class="text-md mt-1 ml-14 mb-3">
-<h1><span class="font-bold">Harap berhati-hati dalam memberi tanggapan.</span>Komentar yang sudah dikirim tidak dapat dihapus kembali.</h1>
-     </div>            
-            <div class="flex flex-row mx-10 mb-4 ">
-    <div>
-      <img
-                :src="Logo"
-                class="h-16 w-16 bg-white rounded-full border"
+      <div v-else>
+          <div class="ml-2">
+          <div class="flex flex-row">
+            <img
+                :src="feedbackList.lecturer.avatar"
+                class="h-9 w-9 mr-3 bg-white rounded-full border"
                 alt="..."
               />
-    </div>
-    <div class="ml-3 mt-1">
-        
-<label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
-<textarea id="message" rows="4" class="mb-2 block p-2.5 w-[800px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-<p >Dengan mengirim tanggapan, Anda menerima syarat dan ketentuan serta kebijakan privasi Kotak Pengaduan JTIK </p>
-    </div>
+            <div class="flex flex-col">
+            <p class="text-black text-xl font-bold mt-1">{{feedbackList.lecturer.type}}</p>
+            <p class="text-black text-md mt-1 ">{{feedbackList.message}}</p>
+          </div>
             </div>
-            <div class="flex justify-end ">
-            <button type="button" class="w-44 mr-12  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Kirim Tanggapan</button>
-            </div>
-    </div>
+          </div>
+      </div>
+                              <br>
+      </div>
+         <div v-if="profileList.lecturer_type > 0 && feedbackList.length === 0 ">
+
+   <feedback/>
+   </div>
+   <!-- <div v-else-if="ComplaintDetail.status === 'Published'">
+  </div> -->
   </div>   
   <div class="px-10 text-left">
     <p class="font-bold text-lg underline underline-offset-8 mb-3"> Komentar</p>
   <div>
     <div class="mb-6">
-    <input type="text" placeholder="masukan komenta anda disini..." id="large-input" class="mb-3 block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 overflow-x dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <button type="submit" class="justify-items-end	text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
+    <input type="text"  v-model="ComplaintDetail._id" class="hidden">
+    <input type="text" v-model="message" placeholder="masukan komentar anda disini..." id="large-input" class="mb-3 block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 overflow-x dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+   <div v-if="profileList.lecturer_type > 0">
+    <button @click="createCommentLectures" class="justify-items-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
+  </div>  
+  <div v-else >
+    <button @click="createComments" class="justify-items-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
+
+  </div>  
+  </div>
+      <div class="toast-container"></div>
+    <hr class="mb-3"/>
+    <div v-if="commentList.length === 0" class="text-center text-lg">
+      <div class="flex justify-center">
+      <div><img :src="vote" class="w-16 h-16 item-center mb-2" alt="..."></div>
+    </div>
+    <div>    <p class="font-sans">Belum ada Komentar</p>
 </div>
-    <hr class="mb-3 mx-"/>
-<div class="flex flex-row">
-    <div>
-      <img
-                :src="Logo"
-                class="h-16 w-16 bg-white rounded-full border"
+    </div>
+    <div v-else>
+    <div v-for="comment in commentList" :key="comment._id">
+    <div class="ml-3 mt-1">
+      <div class="flex flex-row">
+        <img
+                :src="comment.profileData.avatar"
+                class="h-9 w-9 mr-3 bg-white rounded-full border"
                 alt="..."
               />
+      <div class="flex flex-col">
+        <p class="font-bold mb-2 underline">{{comment.createdBy}}</p>
+        <p class="mb-2">{{comment.message}}</p>
+        <p class="mb-2 text-xs">{{moment(comment.createdAt).locale("id").format("DD-MM-YYYY")}}</p>
+        <hr class="w-full"/>
+      </div>
     </div>
-    <div class="ml-3 mt-1">
-        <p class="font-bold ">Anonym</p>
-        <p>Ini isi komentar</p>
-    </div>
+
+      </div>
+</div>
 </div>
   </div>
   </div>
@@ -88,36 +109,310 @@
 </template>
 
 <script>
-import Logo from "@/assets/img/PENGADUAN.png";
+  import Logo from "@/assets/img/PENGADUAN.png";
+  import { ComplaintController } from "@/controller/ComplaintController.js";
+  import { FeedbackController } from "@/controller/FeedbackController.js";
+  import moment from 'moment';
+  import { CommentController } from "@/controller/CommentController.js";
+  import vote from "@/assets/img/voting.png";
+  import { ProfileController } from "@/controller/ProfileController.js";
+  import feedback from '@/components/CreateFeeback.vue'
 
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  export default {
+    name: 'HelloWorld',
+    components :{
+      feedback
+    },
+    props: {
+      msg: String,
+      item:{
+        type: Object,
+      }
+    },
+    data()
+  {
+    return{
+        moment: moment,
+    Logo,
+    vote,
+    commentList:[],
+    errorMessage:"",
+    feedbackList:[],
+    // moment: moment,
+        meta: {
+          page: 1,
+          size: "",
+        },
+        complaint_id:"",
+        message:"",
+        messageLecturer:"",
+        comment: new CommentController(false, false, ""),
+        complaint: new ComplaintController(false, false, ""),
+        feedback: new FeedbackController(false, false, ""),
+        Profile: new ProfileController(false,false,""),
+
+    }
   },
-  data()
-{
-  return{
-  Logo,
-  }
-}
-}
-</script>
+  computed:{
+    isErrorComplaint() {
+        return this.complaint.error;
+      },
+      ComplaintDetail() {
+      return this.complaint.lists;
+    },
+      errorCauseComplaint() {
+        return this.complaint.errorCause;
+      },
+      isLoadingComplaint() {
+        return this.complaint.loading;
+      },
+      isErrorComment() {
+        return this.comment.error;
+      },
+      commentList() {
+      return this.comment.lists;
+    },
+      errorCauseComment() {
+        return this.comment.errorCause;
+      },
+      isLoadingFeedback() {
+        return this.feedback.loading;
+      },
+      isErrorFeedback() {
+        return this.feedback.error;
+      },
+      feedbackList() {
+      return this.feedback.lists;
+    },
+    profileList() {
+      return this.Profile.list;
+    },
+      errorCauseFeedback() {
+        return this.feedback.errorCause;
+      },
+      isLoadingFeedback() {
+        return this.feedback.loading;
+      },
+  },
+  created() {
+    this.getComplaintDetail();
+    this.complaint_id = this.$route.params.id || ''; // Assign value to profileList.avatar
+    this.profile();
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+    },
+    mounted() {
+      this.getComplaintDetail();
+      this.getComment();
+      this.getFeedback();
+      this.getProfileLecturer();
+
+    },
+  methods: {
+      async getDetailComplaint(id) {
+      return this.complaint.getComplaintDetail(id);
+    },
+    async getComplaintDetail() {
+      await this.getDetailComplaint(this.$route.params.id);
+    },
+    async createComments() {
+      await this.createComment(
+        this.complaint_id,
+        this.message,
+        ).then(() => {
+          const toast = document.createElement("div");
+          toast.className = "toast toast-success";
+          toast.innerHTML = "Berhasil Membuat Komentar";
+
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+            location.reload();
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.errorMessage = "Terjadi kesalahan saat Import data mahasiswa";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);        });
+        },
+    async createComment(complaint_id,message) {
+      return this.comment.createComment(
+        complaint_id,
+        message
+      ).then(() => {
+          const toast = document.createElement("div");
+          toast.className = "toast toast-success";
+          toast.innerHTML = "Berhasil Membuat Tanggapan, Tanggapan akan dimoderasi terlebih dahulu";
+
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+            location.reload();
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.errorMessage = "Terjadi kesalahan saat Membuat Tanggapan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);        });
+    },
+    async createCommentLectures() {
+      await this.createCommentLecture(
+        this.complaint_id,
+        this.message,
+      ).then(() => {
+          const toast = document.createElement("div");
+          toast.className = "toast toast-success";
+          toast.innerHTML = "Berhasil Membuat Tanggapan, Tanggapan akan dimoderasi terlebih dahulu";
+
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+            location.reload();
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.errorMessage = "Terjadi kesalahan saat Membuat Tanggapan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);        });},
+    async createCommentLecture(complaint_id,message) {
+      return this.comment.createCommentLecture(
+        complaint_id,
+        message
+      );
+    },
+    async createFeedbacks() {
+      await this.createFeedback(
+        this.complaint_id,
+        this.message,
+      ).then(() => {
+          const toast = document.createElement("div");
+          toast.className = "toast toast-success";
+          toast.innerHTML = "Berhasil Membuat Tanggapan, Tanggapan akan dimoderasi terlebih dahulu";
+
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+            location.reload();
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.errorMessage = "Terjadi kesalahan saat Membuat Tanggapan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);        });
+    },
+    async createFeedback(complaint_id,message) {
+      return this.feedback.createFeedback(
+        complaint_id,
+        message
+      );
+    },
+    async getCommentList(id) {
+      return this.comment.getCommentList(id);
+    },
+    async getComment() {
+      await this.getCommentList(this.$route.params.id);
+    },
+    async getFeedbackList(id) {
+      return this.feedback.getFeedbackList(id);
+    },
+    async getFeedback() {
+      await this.getFeedbackList(this.$route.params.id);
+    },
+    async getProfileLecturer() {
+   return this.Profile.getProfileLecturer();
+ },
+ async profile() {
+   await this.getProfileLecturer();
+ },
+      // async getUpdateActivity(id) {
+      //   return this.notif.getActivityListUpdate(id);
+      // },
+      // async getUpdateStatus(id) {
+      //   await this.getUpdateActivity(id);
+      //   this.getActivity();
+      // },
+      // setNotification() {
+      //   setNotif(this.notip);
+        
+      // },
+    },
+  }
+  </script>
+  
+  <!-- Add "scoped" attribute to limit CSS to this component only -->
+  <style scoped>
+  h3 {
+    margin: 40px 0 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  .toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.toast {
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  opacity: 0.9;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.toast-success {
+  background-color: #2ecc71;
 }
-a {
-  color: #42b983;
+.toast-error {
+  background-color: #2ecc71;
 }
-</style>
+  </style>
+  

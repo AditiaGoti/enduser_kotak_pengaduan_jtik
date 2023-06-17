@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[640px] bg-gradient-to-b from-emerald-600 to-white to-100%">
+  <div class="h-[640px] bg-gradient-to-b from-blue-800 to-white to-100%">
     <div class="flex content-center items-center justify-center h-full">
       <div class="w-full lg:w-4/12 px-4">
         <div class="text-white mt-8 text-left px-5 mb-2 flex flex-row">
@@ -13,7 +13,7 @@
               <hr class="mb-2"/>
         <p class="text-white font-bold text-lg mb-4">SIGN IN TO YOUR ACCOUNT</p>
         <div
-          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg shadow-gray-700 border-2 bg-emerald-600 border-emerald-500"
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg shadow-gray-700 border-2 bg-blue-800 border-blue-500"
         >
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form class="text-left"> 
@@ -77,46 +77,11 @@
                 'outline-red-star': errorMsg.password,
               }"
                 />
-                <div
-              class="
-                absolute
-                inset-y-14
-                right-2
-                flex
-                items-center
-                text-base
-                leading-5
-                cursor-pointer
-              "
-            >
-              <span class="bg-grey-darker"
-                ><i
-                  class="fa-lg fa-regular"
-                  :class="{
-                    'fa-eye-slash': !showPassword,
-                    'fa-eye': showPassword,
-                  }"
-                  @click="toggleShow"
-                ></i
-              ></span>
-            </div>
               </div>
               <p v-if="errorMsg.password" class="text-red-star mx-[30px] mb-4">
           {{ errorMsg.password }}
         </p>
               <div class="flex flex-row justify-between">
-                <div>
-                <label class="inline-flex items-center cursor-pointer">
-                  <input
-                    id="customCheckLogin"
-                    type="checkbox"
-                    class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                  />
-                  <span class="ml-2 text-sm font-semibold text-white">
-                    Remember me
-                  </span>
-                </label>
-                </div>
                 <div class="relative bottom-1">
             <router-link to="/resetpassword">
             <a  class=" font-semibold text-white">
@@ -125,12 +90,12 @@
             </router-link>
         </div>
               </div>
-
+              <div class="toast-container"></div>
               <div class="text-center mt-6">
           
                 <button
                 :onClick="loginAction"
-                  class="bg-white text-emerald-600 active:bg-blueGray-600 text-md font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                  class="bg-white text-blue-800 active:bg-blueGray-600 text-md font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   type="button"
                 >
                   Sign In
@@ -199,13 +164,31 @@ export default {
   methods: {
     async doLogin(nim, password) {
       return this.auth.signInStudent(nim, password);
-    },
+      },
+      createToast(message, type) {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = message;
+
+    const toastContainer = document.querySelector('.toast-container');
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+      toastContainer.removeChild(toast);
+    }, 2000);
+  },
     async LoginStudent() {
-      await this.doLogin(this.nim, this.password);
+      await this.doLogin(this.nim, this.password)
+      .then(response => {
+        localStorage.setItem('kpjtik_access_token', response.data.data.accessToken)
+        localStorage.setItem('kpjtik_acc_name', response.data.data.name)
+        localStorage.setItem('kpjtik_id', response.data.data._id)
+        localStorage.setItem('kpjtik_email', response.data.data.email)
+        localStorage.setItem('kpjtik_nim', response.data.data.nim)
+      });
       if (!this.isError) {
         this.$router.push("/");
-        window.location.reload();
-        this.isLoading = false;
+        this.createToast('Berita berhasil terbuat', 'success');
         // this.$store.dispatch("pin/getPin");
       } else if (this.errorCause == "user not found") {
         this.errorMsg.nim = "Nim Belum Terdaftar";
@@ -266,3 +249,23 @@ export default {
   },
 };
 </script>
+<style>
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+  .toast {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: white;
+    opacity: 0.9;
+  }
+
+  .toast-success {
+    background-color: #2ecc71;
+  }
+</style>

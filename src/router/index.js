@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import HomeViewLecturer from '../views/HomeViewLecturer.vue'
 import Detail from '../views/Detail.vue'
 import DetailTanggapanUser from '../views/DetailTanggapanUser.vue'
 import profile from '../views/Profile.vue'
@@ -7,8 +8,10 @@ import editprofile from '../views/EditProfile.vue'
 import changepass from '../views/ChangePassword.vue'
 import CreateComplaint from '../views/BuatKeluhan.vue'
 import LoginUser from '../views/LoginUser.vue'
+import LoginLecturer from '../views/LoginLecturer.vue'
 import ResetPass from '../views/ResetPassword.vue'
 import Keluhan from '../views/Keluhan.vue'
+import KeluhanLecturer from '../views/KeluhanLecturer.vue'
 import Tanggapan from '../views/Tanggapan.vue'
 const routes = [
   {
@@ -17,12 +20,22 @@ const routes = [
     component: LoginUser
   },
   {
+    path: '/loginlecturer',
+    name: 'loginlecturer',
+    component: LoginLecturer
+  },
+  {
     path: '/',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/detail',
+    path: '/lecturer',
+    name: 'homeLecturer',
+    component: HomeViewLecturer
+  },
+  {
+    path: '/detail/:id',
     name: 'detail',
     component: Detail
   },
@@ -57,9 +70,14 @@ const routes = [
     component: CreateComplaint
   },
   {
-    path: '/keluhan',
+    path: '/keluhan/:id',
     name: 'keluhan',
     component: Keluhan
+  },
+  {
+    path: '/keluhanlecturer',
+    name: 'keluhanlecturer',
+    component: KeluhanLecturer
   },
   {
     path: '/tanggapan',
