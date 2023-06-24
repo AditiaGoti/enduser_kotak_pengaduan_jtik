@@ -11,6 +11,7 @@ import LoginUser from '../views/LoginUser.vue'
 import LoginLecturer from '../views/LoginLecturer.vue'
 import ForgotPass from '../views/ForgotPassword.vue'
 import ResetPass from '../views/ResetPassword.vue'
+import ResetPassLect from '../views/ResetPassLecturer.vue'
 import Keluhan from '../views/Keluhan.vue'
 import KeluhanLecturer from '../views/KeluhanLecturer.vue'
 import Tanggapan from '../views/Tanggapan.vue'
@@ -29,6 +30,11 @@ const routes = [
     path: '/forgotpasslecturer',
     name: 'forgotpasslecturer',
     component: ForgotPass
+  },
+  {
+    path: '/resetpasswordlecturer',
+    name: 'resetpasswordlecturer',
+    component: ResetPassLect
   },
   {
     path: '/',
