@@ -180,7 +180,8 @@
           }, 2000);
         })
         .catch((error) => {
-          this.errorMessage = "Terjadi kesalahan saat Membuat Tanggapan";
+          if(this.message == ""){
+            this.errorMessage = "Tolong Masukan Isi Tanggapan";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -189,7 +190,20 @@
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-          }, 2000);             });},
+          }, 2000);
+          } else {
+            this.errorMessage = "Terjadi kesalahan saat Membuat Tanggapan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          }
+          });},
     async createFeedbackLecturer(complaint_id,message) {
       return this.feedback.createFeedback(
         complaint_id,

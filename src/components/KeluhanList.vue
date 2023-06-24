@@ -1,8 +1,9 @@
 <template>
     <div class="flex flex-col">
   <p class="font-bold text-2xl mb-2 underline decoration-2 text-left ml-32 "> Keluhan Pengguna </p>
-  <div v-if="ComplaintList.length > 0" v-for="(complaint, Index) in ComplaintList" :key="complaint._id" class="ml-32 mb-4 border-none w-[700px] hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
-    <div class="flex flex-row ">
+  <div v-if="ComplaintList.length > 0" >
+    <div v-for="(complaint) in ComplaintList" :key="complaint._id" class="ml-32 mb-4 border-none w-[700px] hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
+    <div class="flex flex-row " >
         <img
         :src="complaint.attachmentImage"
         class="w-64 h-48 m-4"
@@ -31,6 +32,7 @@
             </div>
           </div>
           </div>
+    </div>
     </div>
     <hr class="font-bold w-[700px] mb-3" />
 

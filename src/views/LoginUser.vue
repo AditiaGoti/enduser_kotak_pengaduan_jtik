@@ -39,9 +39,6 @@
               }"
                 />
               </div>
-              <p v-if="errorMsg.nim" class="text-red-star mb-2">
-            {{ errorMsg.nim }}
-          </p>
               <div class="relative w-full mb-3">
                 <label
                   class="block uppercase text-white text-md font-bold mb-2"
@@ -78,10 +75,7 @@
               }"
                 />
               </div>
-              <p v-if="errorMsg.password" class="text-red-star mx-[30px] mb-4">
-          {{ errorMsg.password }}
-        </p>
-              <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-between">
                 <div class="relative bottom-1">
             <router-link to="/resetpassword">
             <a  class=" font-semibold text-white">
@@ -90,7 +84,7 @@
             </router-link>
         </div>
               </div>
-              <div class="toast-container"></div>
+<div class="toast-container"></div>
               <div class="text-center mt-6">
           
                 <button
@@ -122,6 +116,7 @@ export default {
       nim: "",
       password: "",
       vote,
+      errorMessage:"",
       validate: {
         emptyNim: false,
         emptyPassword: false,
@@ -152,7 +147,6 @@ export default {
   },
   watch: {
     nim(value) {
-      // binding this to the data value in the email input
       this.nim = value;
       this.validatenim(value);
     },
@@ -165,18 +159,6 @@ export default {
     async doLogin(nim, password) {
       return this.auth.signInStudent(nim, password);
       },
-      createToast(message, type) {
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.innerHTML = message;
-
-    const toastContainer = document.querySelector('.toast-container');
-    toastContainer.appendChild(toast);
-
-    setTimeout(() => {
-      toastContainer.removeChild(toast);
-    }, 2000);
-  },
     async LoginStudent() {
       await this.doLogin(this.nim, this.password)
       .then(response => {
@@ -185,30 +167,90 @@ export default {
         localStorage.setItem('kpjtik_id', response.data.data._id)
         localStorage.setItem('kpjtik_email', response.data.data.email)
         localStorage.setItem('kpjtik_nim', response.data.data.nim)
-      });
-      if (!this.isError) {
-        this.$router.push("/");
-        this.createToast('Berita berhasil terbuat', 'success');
-        // this.$store.dispatch("pin/getPin");
-      } else if (this.errorCause == "user not found") {
-        this.errorMsg.nim = "Nim Belum Terdaftar";
-        this.errorMsg.password = "Password salah. Silahkan coba lagi";
-      } else if (this.errorCause == "Not a valid Nim") {
-        this.errorMsg.nim = "Nim tidak boleh kosong";
-        if (this.password == "") {
-          this.errorMsg.password = "Password tidak boleh kosong";
-        } else {
-          this.errorMsg.password = "";
-        }
-      } else if (
+      }).then(() => {
+          const toast = document.createElement("div");
+          toast.className = "toast toast-success";
+          toast.innerHTML = "Berhasil Login";
+
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+            this.$router.push("/");
+          }, 2000);
+        }) .catch((error) => {
+           if(this.nim == "" && this.password ==""){
+          this.errorMessage = "NIM dan Password Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+          else if(this.nim == ""){
+          this.errorMessage = "Nim Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+          else if(this.password == "")
+          {       
+          this.errorMessage = "Password Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+          else {
+              this.errorMessage = "Nim atau password salah";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);  
+          }
+ });
+      if (this.errorCause == "Email atau Password salah!") {
+        this.errorMessage = "NIM atau Password Salah";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);  
+      }  else if (
         this.errorCause == "password invalid" ||
         this.errorCause == "Not a valid password"
       ) {
         if (this.password == "") {
           this.errorMsg.password = "Password tidak boleh kosong";
         } else {
-          this.errorMsg.password = "Password salah. Silahkan coba lagi";
-        }
+          this.errorMessage = "Password Salah";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);          }
       }
     },
     loginAction() {
@@ -264,6 +306,9 @@ export default {
     color: white;
     opacity: 0.9;
   }
+  .toast-error {
+  background-color: red;
+}
 
   .toast-success {
     background-color: #2ecc71;

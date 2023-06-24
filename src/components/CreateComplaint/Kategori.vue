@@ -35,7 +35,7 @@
     <img class="w-16 h-16 mb-3 rounded-full shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 rounded-full" :src="Logo" alt="Bonnie image"/>
     <p>Akademik</p>
                 </div>
-                <div :class="{'image-selected': selectedCategory === 2}" class="cursor-pointer" id="2" @click="handleCategoryClick(2)">
+                <div :class="{'image-selected': selectedCategory === 2}" class="cursor-pointer ml-36" id="2" @click="handleCategoryClick(2)">
                     <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
                     <p>Fasilitas / Layanan</p>
                 </div>
@@ -44,16 +44,16 @@
             <div class="text-sm flex flex-row justify-between mx-24">
                 <div :class="{'image-selected': selectedCategory === 3}" class="cursor-pointer" id="3" @click="handleCategoryClick(3)">
                     <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
-                    <p>Kategori 3</p>
+                    <p>Kemahasiswaan</p>
                 </div>
                 <div :class="{'image-selected': selectedCategory === 4}" class="cursor-pointer" id="4" @click="handleCategoryClick(4)">
                     <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
-                    <p>Kategori 4</p>
+                    <p>Keuangan</p>
                 </div>
             </div>
             
             <div class="text-sm flex flex-row justify-between mx-24 mb-3">
-                <div :class="{'image-selected': selectedCategory === 5}" class="cursor-pointer" id="5" @click="handleCategoryClick(5)">
+                <div :class="{'image-selected': selectedCategory === 5}" class="cursor-pointer mt-4" id="5" @click="handleCategoryClick(5)">
                     <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
                     <p>Lain Lain</p>
                 </div>

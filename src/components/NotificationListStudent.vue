@@ -26,12 +26,12 @@
       <!-- <input type="text"  v-model="notif._id" class="hidden"> -->
       <input v-model="notif._id" type="text" class=" hidden text-md text-left border-none break-words whitespace-normal mb-5" disabled />
       <button href="#" class="flex px-4 py-3 text-left font-light bg-gray-400 text-black hover:bg-gray-100"
-      @click="updateNotif(notif._id)">
+      @click="updateStatusNotif(notif._id)">
         {{ notif.message }}
       </button>
     </div>
     <div v-else>
-      <a href="#" class="flex px-4 py-3 font-light text-black hover:bg-gray-100"
+      <a href="#" class="flex bg-white px-4 py-3 font-light text-black hover:bg-gray-100"
       >
         {{ notif.message }}
       </a>
@@ -119,19 +119,6 @@ methods: {
  async getNotifList() {
    await this.getNotificationlist(this.meta.page, this.meta.size);
  },
-//  async getNotificationComplaint(page, size) {
-//    return this.notif.getNotificationComplaint(page, size);
-//  },
-//  async getNotifListComplaint() {
-//    await this.getNotificationComplaint(this.meta.page, this.meta.size);
-//  },
-
-// async getNotificationUnopenned(page, size) {
-//       return this.notif.getNotificationUnopenned(page, size);
-//     },
-//     async getNotifListUnopenned() {
-//       await this.getNotificationUnopenned(this.meta.page, this.meta.size);
-//     },
 async updateStatusNotif(notification_id) {
   await this.updateNotif(notification_id);
 },

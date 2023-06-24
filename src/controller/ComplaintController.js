@@ -80,10 +80,10 @@ async createComplaint(category_id, lecturer_type, createdBy, title, body, attach
     this.lists = data
   }
     
-    async getComplaintListUser(id) {
-        setBasicAuth();
-        setChanceControl();
-              const response = await axiosInstance.get(`/v1/complaint?student_id=${id}`)
+    async getComplaintListUser() {
+      const token = localStorage.getItem('kpjtik_access_token');
+      setBearerToken(token);
+              const response = await axiosInstance.get(`/student/v1/complaint`)
               this.setLists(response.data.data.list);
               console.log(response.data.data.list,"list complaint")
               return response

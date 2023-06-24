@@ -9,6 +9,7 @@ import changepass from '../views/ChangePassword.vue'
 import CreateComplaint from '../views/BuatKeluhan.vue'
 import LoginUser from '../views/LoginUser.vue'
 import LoginLecturer from '../views/LoginLecturer.vue'
+import ForgotPass from '../views/ForgotPassword.vue'
 import ResetPass from '../views/ResetPassword.vue'
 import Keluhan from '../views/Keluhan.vue'
 import KeluhanLecturer from '../views/KeluhanLecturer.vue'
@@ -23,6 +24,11 @@ const routes = [
     path: '/loginlecturer',
     name: 'loginlecturer',
     component: LoginLecturer
+  },
+  {
+    path: '/forgotpasslecturer',
+    name: 'forgotpasslecturer',
+    component: ForgotPass
   },
   {
     path: '/',

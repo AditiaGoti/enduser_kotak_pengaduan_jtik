@@ -2,7 +2,7 @@
     <div id="default-carousel" class="relative ml-32 mr-10 w-[700px] border-8 rounded-lg mb-3" data-carousel="slide">
       <!-- Carousel wrapper -->
       <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-        <div
+        <!-- <div
         v-for="(complaint, index) in complaintList"
           :key="index"
           :class="['duration-1000', { 'ease-in-out': complaint._id === complaintList[activeSlide]._id }, { 'opacity-100': complaint._id === complaintList[activeSlide]._id }, { 'opacity-0': complaint._id !== complaintList[activeSlide]._id }]"
@@ -20,12 +20,12 @@
             <h2 class="text-3xl font-bold">{{ complaint.title }}</h2>
             <p class="mt-2 ml-2 text-lg">{{ complaint.body }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
   
       <!-- Slider indicators -->
       <!-- Slider controls -->
-      <button
+      <!-- <button
         type="button"
         class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         data-carousel-prev
@@ -64,7 +64,7 @@
           </svg>
           <span class="sr-only">Next</span>
         </span>
-      </button>
+      </button> -->
     </div>
   </template>
   <script>

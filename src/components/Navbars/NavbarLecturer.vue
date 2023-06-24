@@ -38,7 +38,7 @@
     
      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
        <router-link
-     to="/buatkeluhan"
+     to="/keluhan"
      >
        <li class="flex items-center">
          <a
@@ -243,10 +243,11 @@ this.getProfileLecturer();
 methods: {
  logout() {
    this.loadingStatus = true;
-   setTimeout(removeAuth(), 3500);
-   localStorage.clear();
-   this.$router.push("/");
-   window.location.reload();
+      setTimeout(removeAuth(), 3500);
+      localStorage.clear();
+      // window.location.reload();
+      this.$router.push("/");
+
  },
  async getNotificationlistLecturer(page, size) {
    return this.notif.getNotificationlistLecturer(page, size);

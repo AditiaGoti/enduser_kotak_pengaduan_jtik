@@ -119,7 +119,66 @@ export default {
           }, 2000);
         })
         .catch((error) => {
-          console.error(error);
+ if(this.category_id == ""){
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Pilih Kategori Keluhan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          } 
+          else if(this.lecturer_type == ""){
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Pilih Role yang dituju";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          } 
+          else if(this.title == ""){
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Masukan Judul Keluhan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          } 
+          else if(this.body == ""){
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Masukan Isi Keluhan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          }
+           else {
+            this.errorMessage = "Terjadi kesalahan saat Membuat Keluhan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          }
         });
     },
   createComplaint(category_id, lecturer_type, createdBy, title, body, attachmentImage) {
@@ -160,5 +219,8 @@ export default {
 
   .toast-success {
     background-color: #2ecc71;
+  }
+  .toast-error {
+  background-color: red;
   }
 </style>

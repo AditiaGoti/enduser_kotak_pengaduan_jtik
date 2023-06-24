@@ -260,11 +260,9 @@ export default {
   },
   methods: {
     loginStudent() {
-    // Logic to handle login based on user type
       this.$router.push('/login');
   },
   loginLecturer() {
-    // Logic to handle login based on user type
       this.$router.push('/loginlecturer');
   },
     toComplaintUser(Index) {
@@ -278,8 +276,9 @@ export default {
       this.loadingStatus = true;
       setTimeout(removeAuth(), 3500);
       localStorage.clear();
-      this.$router.push("/");
       window.location.reload();
+      this.$router.push("/");
+
     },
     async getNotificationlist(page, size) {
       return this.notif.getNotificationlist(page, size);
