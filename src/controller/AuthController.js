@@ -47,7 +47,7 @@ export class AuthControllers {
     }
     async forgotPassStudent(nim) {
         this.setLoading(true)
-        setBasicAuthLecturer();
+        setBasicAuth();
         const response = await axiosInstancelecturer.post('/student/v1/password/forget', {
                 nim: nim,
               });
