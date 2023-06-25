@@ -97,7 +97,7 @@
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/lecturer");
+            this.$router.push("/");
           }, 2000);
         }) .catch((error) => {
           if(this.nim == ""){

@@ -29,7 +29,7 @@
                   id="nim"
                     type="number"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Nip"
+                    placeholder="NIM"
                   />
                 </div>
                 <div class="relative w-full mb-3">
@@ -104,15 +104,15 @@
       },
     },
     methods: {
-      async doReset(nip,forgetPasswordToken,newPassword) {
+      async doReset(nim,forgetPasswordToken,newPassword) {
         return this.auth.resetPassStudent(
-          nip,
+          nim,
           forgetPasswordToken,
           newPassword);
         },
       async resetPasswordStudent() {
         await this.doReset(
-          this.nip,
+          this.nim,
           this.forgetPasswordToken,
           this.newPassword)
         .then(() => {
@@ -129,7 +129,7 @@
           }, 2000);
         }) .catch((error) => {
              if(this.nim == "" && this.newPassword==""){
-          this.errorMessage = "NIP dan Password Tidak Boleh Kosong";
+          this.errorMessage = "NIM dan Password Tidak Boleh Kosong";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -139,7 +139,7 @@
             toastContainer.removeChild(toast);
           }, 2000);       }
           else if(this.nim == ""){
-          this.errorMessage = "Nip Tidak Boleh Kosong";
+          this.errorMessage = "NIM Tidak Boleh Kosong";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
