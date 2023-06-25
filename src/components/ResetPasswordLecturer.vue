@@ -1,51 +1,210 @@
 <template>
-  <div class="mt-24 flex flex-col items-center border-none mb-10">
-<div class="w-[350px]  p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex justify-end px-4 pt-4">
-    </div>
-    <div class="flex flex-col items-center pb-10">
-<p class="font-bold text-lg mb-3"> Reset Password </p>
-<form class="w-full">
-  <div class="mb-6 mx-2">
-    <label for="NIP" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white text-left">NIP</label>
-    <input type="text" id="Email" placeholder="NIP" class="placeholder-blueGray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-  </div>
-  <div class="mb-6 mx-2">
-    <label for="password" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white text-left">Password Baru</label>
-    <input type="password" id="passwordLama" placeholder="Password" class="placeholder-blueGray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-  </div>
-</form>
-        <div class="flex mt-4 space-x-3 md:mt-6 mx-2">
-            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ganti Password</a>
-            <router-link to="/">
-            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Kembali</a>
-            </router-link>
-        </div>
-    </div>
-</div>
-  </div>
-</template>
-<script>
+    <div class="h-[640px] bg-gradient-to-b from-blue-800 to-white to-100%">
+      <div class="flex content-center items-center justify-center h-full">
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="text-white mt-8 text-left px-5 mb-2 flex flex-row">
+            <div>
+          <img :src="vote" class="w-32 h-32"/>
+            </div>
+            <div>
+                <p class="font-sans font-bold mt-16 text-2xl">KOTAK PENGADUAN JTIK</p>
+            </div>
+          </div>
+                <hr class="mb-2"/>
+          <p class="text-white font-bold text-lg mb-4">Reset Password</p>
+          <div
+            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg shadow-gray-700 border-2 bg-blue-800 border-blue-500"
+          >
+            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <form class="text-left"> 
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-white text-md font-bold mb-2 mt-5"
+                    htmlFor="grid-password"
+                  >
+                    NIP
+                  </label>
+                  <input
+                  v-model="nip"
+                  id="nim"
+                    type="number"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Nip"
+                  />
+                </div>
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-white text-md font-bold mb-2 mt-5"
+                    htmlFor="grid-password"
+                  >
+                    New Password
+                  </label>
+                  <input
+                  v-model="newPassword"
+                  id="password"
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Nip"
+                  />
+                </div>
+                <input
+                  v-model="forgetPasswordToken"
+                  id="password"
+                    type="text"
+                    class="hidden border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Nip"
+                  />
+  <div class="toast-container"></div>
 
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  data()
-{
-  return{
+                <div class="text-center mt-6">
+            
+                  <button
+                  :onClick="resetPasswordStudent"
+                    class="bg-white text-blue-800 active:bg-blueGray-600 text-md font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    type="button"
+                  >
+                    Send
+                  </button>
+               
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+  import vote from "@/assets/img/voting.png";
+  import { AuthControllers } from "@/controller/AuthController.js";
+import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
   
+  export default {
+    data() {
+      return {
+        auth: new AuthControllers(false, false, ""),
+        nip: "",
+        vote,
+        errorMessage:""
+      };
+    },
+    computed: {
+      isError() {
+        return this.auth.error;
+      },
+  
+      errorCause() {
+        return this.auth.errorCause;
+      },
+  
+      isLoading() {
+        return this.auth.loading;
+      },
+      buttonLabel() {
+        return this.showPassword ? "Hide" : "Show";
+      },
+    },
+    methods: {
+      async doReset(nip,forgetPasswordToken,newPassword) {
+        return this.auth.resetPassLecturer(
+          nip,
+          forgetPasswordToken,
+          newPassword);
+        },
+      async ResetPasswordLecturer() {
+        await this.doReset(
+          this.nip,
+          this.forgetPasswordToken,
+          this.newPassword)
+        .then(() => {
+          const toast = document.createElement("div");
+          toast.className = "toast toast-success";
+          toast.innerHTML = "Berhasil Mengirim";
+
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+            this.$router.push("/login");
+          }, 2000);
+        }) .catch((error) => {
+             if(this.nip == "" && this.newPassword==""){
+          this.errorMessage = "NIP dan Password Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+          else if(this.nip == ""){
+          this.errorMessage = "Nip Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+          else if(this.newPassword == ""){
+          this.errorMessage = "Password Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+
+          else {
+              this.errorMessage = "Terjadi Kesalahan, Reset Password Gagal";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);  
+          }});
+      },
+      forgotPassAction() {
+        this.forgotPasswordLecturer();
+      },
+      toggleShow() {
+        if (this.showPassword === false) {
+          this.showPassword = true;
+        } else {
+          this.showPassword = false;
+        }
+      },
+    },
+  };
+  </script>
+  <style>
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
   }
-},
-methods: {
-    toggleShow() {
-      if (this.showPassword === false) {
-        this.showPassword = true;
-      } else {
-        this.showPassword = false;
-      }
-    }
+
+  .toast {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: white;
+    opacity: 0.9;
+  }
+  .toast-error {
+  background-color: red;
 }
-}
-</script>
+
+  .toast-success {
+    background-color: #2ecc71;
+  }
+</style>

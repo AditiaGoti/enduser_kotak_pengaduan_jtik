@@ -101,12 +101,45 @@
           </li>
           <li class="flex item-center" >
             <div class="flex items-center md:order-2">
-      <button type="button" v-if="isLoggedIn" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-        <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" :src="profileList.avatar" alt="user photo">
-      </button>
+          <div
+  class="hidden-arrow flex cursor-pointer items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+  v-if="isLoggedIn"
+  id="user-drop"
+  data-te-dropdown-toggle-ref
+  aria-expanded="false"
+>
+  <!-- User avatar -->
+  <img
+    :src="profileList.avatar" 
+    class="w-8 h-8 rounded-full"
+    alt=""
+    loading="lazy"
+  />
+</div>
+
+         <ul
+          class="absolute z-[1000] m-0 mt-1 hidden min-w-max list-none rounded-lg border-black bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+          aria-labelledby="user-drop"
+          data-te-dropdown-menu-ref>
+           <div class="px-4 py-3">
+          <span class="block text-sm text-gray-900 dark:text-white">{{profileList.name }}</span>
+          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{profileList.email}}</span>
+        </div>
+          <!-- Second dropdown menu items -->
+            <li>
+            <router-link to="/profile">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+            </router-link>
+          </li>
+          <li>
+            <a href="#" @click="toComplaintUser(profileList._id)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Complaint</a>
+          </li>
+          <li>
+            <a :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+          </li>
+        </ul>
       <!-- Dropdown menu -->
-      <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+      <!-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
         <div class="px-4 py-3">
           <span class="block text-sm text-gray-900 dark:text-white">{{profileList.name }}</span>
           <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{profileList.email}}</span>
@@ -124,11 +157,11 @@
             <a :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
           </li>
         </ul>
-      </div>
-        <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+      </div> -->
+        <!-- <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-        </button>
+        </button> -->
         </div>
           </li>
         </ul>
@@ -207,11 +240,11 @@ import { removeAuth } from "@/Utils/localstorage";
 import notification from '@/components/NotificationListStudent.vue'
 
 import {
-  Modal,
-  Ripple,
+  Dropdown,
   initTE,
+  Collapse
 } from "tw-elements";
-initTE({ Modal, Ripple });
+initTE({ Dropdown,Collapse});
 export default {
   components:{
     notification,
@@ -224,6 +257,7 @@ export default {
         size: "",
       },
       notif: "yes",
+      isLoggedIn: false,
       notif: new NotificationController(false, false, ""),
       Profile: new ProfileController(false,false,""),
     };

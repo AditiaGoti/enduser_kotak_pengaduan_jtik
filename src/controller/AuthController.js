@@ -45,6 +45,37 @@ export class AuthControllers {
         console.log("test",response)
         return response
     }
+    async forgotPassStudent(nim) {
+        this.setLoading(true)
+        setBasicAuthLecturer();
+        const response = await axiosInstancelecturer.post('/student/v1/password/forget', {
+                nim: nim,
+              });
+        console.log("test",response)
+        return response
+    }
+    async resetPassStudent(nim,forgetPasswordToken,newPassword) {
+        this.setLoading(true)
+        setBasicAuth();
+        const response = await axiosInstancelecturer.post('/student/v1/password/reset', {
+                nim: nim,
+                forgetPasswordToken : forgetPasswordToken,
+                newPassword : newPassword
+              });
+        console.log("test",response)
+        return response
+    }
+    async resetPassLecturer(nip,forgetPasswordToken,newPassword) {
+        this.setLoading(true)
+        setBasicAuth();
+        const response = await axiosInstancelecturer.post('/lecturer/v1/password/reset', {
+                nim: nip,
+                forgetPasswordToken : forgetPasswordToken,
+                newPassword : newPassword
+              });
+        console.log("test",response)
+        return response
+    }
 
     async changePassStudent(oldPassword,newPassword) {
         const token = localStorage.getItem('kpjtik_access_token')

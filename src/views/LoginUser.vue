@@ -77,7 +77,7 @@
               </div>
             <div class="flex flex-row justify-between">
                 <div class="relative bottom-1">
-            <router-link to="/resetpassword">
+            <router-link to="/forgotpassstudent">
             <a  class=" font-semibold text-white">
               <small>Forgot password?</small>
             </a>

@@ -10,6 +10,7 @@ import CreateComplaint from '../views/BuatKeluhan.vue'
 import LoginUser from '../views/LoginUser.vue'
 import LoginLecturer from '../views/LoginLecturer.vue'
 import ForgotPass from '../views/ForgotPassword.vue'
+import ForgotPassStudent from '../views/ForgotPasswordUser.vue'
 import ResetPass from '../views/ResetPassword.vue'
 import ResetPassLect from '../views/ResetPassLecturer.vue'
 import Keluhan from '../views/Keluhan.vue'
@@ -30,6 +31,11 @@ const routes = [
     path: '/forgotpasslecturer',
     name: 'forgotpasslecturer',
     component: ForgotPass
+  },
+  {
+    path: '/forgotpassstudent',
+    name: 'forgotpassstudent',
+    component: ForgotPassStudent
   },
   {
     path: '/resetpasswordlecturer',

@@ -11,7 +11,7 @@
             </div>
           </div>
                 <hr class="mb-2"/>
-          <p class="text-white font-bold text-lg mb-4">Reset Password</p>
+          <p class="text-white font-bold text-lg mb-4">Forgot Password</p>
           <div
             class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg shadow-gray-700 border-2 bg-blue-800 border-blue-500"
           >
@@ -32,34 +32,12 @@
                     placeholder="Nip"
                   />
                 </div>
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block uppercase text-white text-md font-bold mb-2 mt-5"
-                    htmlFor="grid-password"
-                  >
-                    New Password
-                  </label>
-                  <input
-                  v-model="newPassword"
-                  id="password"
-                    type="text"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Nip"
-                  />
-                </div>
-                <input
-                  v-model="forgetPasswordToken"
-                  id="password"
-                    type="text"
-                    class="hidden border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Nip"
-                  />
   <div class="toast-container"></div>
 
                 <div class="text-center mt-6">
             
                   <button
-                  :onClick="resetPasswordStudent"
+                  :onClick="forgotPassAction"
                     class="bg-white text-blue-800 active:bg-blueGray-600 text-md font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
                   >
@@ -104,17 +82,11 @@
       },
     },
     methods: {
-      async doReset(nip,forgetPasswordToken,newPassword) {
-        return this.auth.resetPassStudent(
-          nip,
-          forgetPasswordToken,
-          newPassword);
+      async doForgot(nim) {
+        return this.auth.forgotPassStudent(nim);
         },
-      async resetPasswordStudent() {
-        await this.doReset(
-          this.nip,
-          this.forgetPasswordToken,
-          this.newPassword)
+      async forgotPassStudent() {
+        await this.doForgot(this.nim)
         .then(() => {
           const toast = document.createElement("div");
           toast.className = "toast toast-success";
@@ -125,31 +97,11 @@
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/login");
+            this.$router.push("/lecturer");
           }, 2000);
         }) .catch((error) => {
-             if(this.nim == "" && this.newPassword==""){
-          this.errorMessage = "NIP dan Password Tidak Boleh Kosong";
-          const toast = document.createElement("div");
-          toast.className = "toast toast-error";
-          toast.innerHTML = this.errorMessage;
-          const toastContainer = document.querySelector(".toast-container");
-          toastContainer.appendChild(toast);
-          setTimeout(() => {
-            toastContainer.removeChild(toast);
-          }, 2000);       }
-          else if(this.nim == ""){
-          this.errorMessage = "Nip Tidak Boleh Kosong";
-          const toast = document.createElement("div");
-          toast.className = "toast toast-error";
-          toast.innerHTML = this.errorMessage;
-          const toastContainer = document.querySelector(".toast-container");
-          toastContainer.appendChild(toast);
-          setTimeout(() => {
-            toastContainer.removeChild(toast);
-          }, 2000);       }
-          else if(this.newPassword == ""){
-          this.errorMessage = "Password Tidak Boleh Kosong";
+          if(this.nim == ""){
+          this.errorMessage = "NIM Tidak Boleh Kosong";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -160,7 +112,7 @@
           }, 2000);       }
 
           else {
-              this.errorMessage = "Terjadi Kesalahan, Reset Password Gagal";
+              this.errorMessage = "NIM Tidak Terdaftar";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -172,7 +124,7 @@
           }});
       },
       forgotPassAction() {
-        this.forgotPasswordLecturer();
+        this.forgotPassStudent();
       },
       toggleShow() {
         if (this.showPassword === false) {
