@@ -28,13 +28,12 @@ export class ProfileController {
         this.list = data
         console.log(this.list);
     }
-    async updateProfile(avatar,name,nim,phoneNumber,email,) {
+    async updateProfile(avatar,name,phoneNumber,email,) {
         const token = localStorage.getItem('kpjtik_access_token')
         setBearerToken(token);
               const response = await axiosInstance.put('/student/v1/profile',{
                 avatar : avatar,
                 name : name,
-                nim : nim,
                 phoneNumber : phoneNumber,
                 email : email,
               })

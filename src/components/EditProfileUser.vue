@@ -112,7 +112,6 @@ created() {
   this.profile();
   this.profileList.avatar = this.profileList.avatar || ''; // Assign value to profileList.avatar
   this.profileList.name = this.profileList.name || ''; // Assign value to profileList.name
-  this.profileList.nim = this.profileList.nim || ''; // Assign value to profileList.nim
   this.profileList.phoneNumber = this.profileList.phoneNumber || ''; // Assign value to profileList.phoneNumber
   this.profileList.email = this.profileList.email || ''; // Assign value to profileList.email
   },
@@ -145,7 +144,6 @@ created() {
       await this.updateProfile(
         this.profileList.avatar,
         this.profileList.name,
-        this.profileList.nim,
         this.profileList.phoneNumber,
         this.profileList.email,
       ).then(() => {
@@ -158,7 +156,7 @@ created() {
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            location.reload();
+            this.$router.push('/profile');
           }, 2000);
         })
         .catch((error) => {
@@ -214,11 +212,10 @@ console.log("file", file.type);
     async profile() {
       await this.getprofile();
     },
-    async updateProfile(avatar,name,nim,phoneNumber,email) {
+    async updateProfile(avatar,name,phoneNumber,email) {
       return this.Profile.updateProfile(
         avatar,
         name,
-        nim,
         phoneNumber,
         email
        
