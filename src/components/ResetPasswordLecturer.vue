@@ -39,12 +39,22 @@
                   >
                     New Password
                   </label>
+                    <input
+                  v-model="newPassword"
+                  v-if="showPassword"
+                  id="password"
+                    type="password"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Password"
+                  />
                   <input
                   v-model="newPassword"
+                  v-else
                   id="password"
-                    type="text"
+                    type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Nip"
+                    placeholder="Password"
+                    @focus="focus"
                   />
                 </div>
                 <input
@@ -114,7 +124,7 @@ import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
       async ResetPasswordLecturer() {
         await this.doReset(
           this.nip,
-          this.forgetPasswordToken,
+          this.$route.query.forgetPasswordToken,
           this.newPassword)
         .then(() => {
           const toast = document.createElement("div");
