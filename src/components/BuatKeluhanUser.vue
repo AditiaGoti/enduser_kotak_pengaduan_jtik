@@ -10,7 +10,7 @@
   v-on:categorySelected="handleCategorySelected"
   @selected-title="handleSelectedTitle"
   @selected-body="handleSelectedBody"
-  @selected-attachment="handleSelectedAttachment"
+  @handleFileUpload="handleSelectedAttachment"
   @selected-createdBy="handleSelectedCreatedBy"
 ></component>
       </div>
@@ -90,8 +90,8 @@ export default {
     handleSelectedBody(body) {
       this.body = body;
     },
-    handleSelectedAttachment(attachment) {
-  this.attachmentImage = attachment;
+    handleSelectedAttachment(attachmentImage) {
+  this.attachmentImage = attachmentImage;
 },
     handleSelectedCreatedBy(createdBy) {
       this.createdBy = createdBy;
@@ -132,7 +132,7 @@ export default {
           }, 2000);
           } 
           else if(this.lecturer_type == ""){
-            this.errorMessage = "Gagal Membuat Keluhan, Mohon Pilih Role yang dituju";
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Pilih Divisi yang dituju";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -144,7 +144,7 @@ export default {
           }, 2000);
           } 
           else if(this.title == ""){
-            this.errorMessage = "Gagal Membuat Keluhan, Mohon Masukan Judul Keluhan";
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Isi Judul Keluhan";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -156,7 +156,19 @@ export default {
           }, 2000);
           } 
           else if(this.body == ""){
-            this.errorMessage = "Gagal Membuat Keluhan, Mohon Masukan Isi Keluhan";
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Isi Keluhan yang disampaikan";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          }
+          else if(this.attachmentImage == ""){
+            this.errorMessage = "Gagal Membuat Keluhan, Mohon Isi Gambar Keluhan";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;

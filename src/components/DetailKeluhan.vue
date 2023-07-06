@@ -7,6 +7,7 @@
     <p class="font-extralight text-sm">Publish at : {{moment(ComplaintDetail.createdAt).locale("id").format("DD-MM-YYYY")}}</p>
     <p class="mx-3 relative bottom-0.5 font-extralight"> | </p>
     <p class="font-extralight text-sm">Author : {{ ComplaintDetail.createdBy }}</p>
+
     </div>
     <div class="flex flex-row mb-3">
     <p class="font-extralight text-sm"> Kategori : {{ ComplaintDetail.category }}</p>
@@ -52,10 +53,23 @@
       </div>
                               <br>
       </div>
-         <div v-if="profileList.lecturer_type > 0 && feedbackList.length === 0 ">
+      <div>
+        <div v-if="isLoggedIn" >
+        <div v-if="feedbackList.length === 0 && profileList.lecturer_type > 0 ">
+  <feedback/>
+        </div>
+        </div>
+</div>
 
-   <feedback/>
+<!-- <div v-else-if="profileList.lecturerType.LT_name === complaintDetail.division">
+  <feedback/>
+</div> -->
+
+      <!-- <div v-else-if="profileRole != ComplaintDetail.division">
+       <feedback/>
    </div>
+   <div v-else>
+   </div> -->
    <!-- <div v-else-if="ComplaintDetail.status === 'Published'">
   </div> -->
   </div>   
@@ -64,20 +78,12 @@
   <div>
     <div class="mb-6">
     <input type="text"  v-model="ComplaintDetail._id" class="hidden">
-    <input type="text" v-model="message" placeholder="masukan komentar anda disini..." id="large-input" class="mb-3 block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 overflow-x dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <textarea type="text" v-model="message" placeholder="masukan komentar anda disini..." id="large-input" class="mb-3 block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 overflow-x dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
   <div  v-if="!isLoggedIn">
         <button       
-        data-modal-target="crypto-modal"
-         data-modal-toggle="crypto-modal"
+        :onClick="modal"
          class="justify-items-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
   </div>
-  <!-- <div  v-else-if="isLoggedIn">
-        <button       
-        data-modal-target="crypto-modal"
-         data-modal-toggle="crypto-modal"
-         class="justify-items-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
-  </div> -->
-  
   <div v-else >
      <div v-if="profileList.lecturer_type > 0">
     <button @click="createCommentLectures" class="justify-items-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
@@ -86,11 +92,15 @@
     <button @click="createComments" class="justify-items-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim Komentar</button>
     </div>
   </div>  
-  <div id="crypto-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+   <div class="modal-backdrop" v-if="showModal"></div>
+
+  </div>
+      <div v-if="showModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="modal-backdrop"></div>
+    <div class="modal w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-blue-800 rounded-lg shadow">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="crypto-modal">
+            <button type="button" :onClick="closeModal" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                 <span class="sr-only">Close modal</span>
             </button>
@@ -147,8 +157,6 @@ Dosen       </a>
         </div>
     </div>
 </div>
-  </div>
-      
     <hr class="mb-3"/>
     <div v-if="commentList.length === 0" class="text-center text-lg">
       <div class="flex justify-center">
@@ -168,7 +176,7 @@ Dosen       </a>
               />
       <div class="flex flex-col">
         <p class="font-bold mb-2 underline">{{comment.createdBy}}</p>
-        <p class="mb-2">{{comment.message}}</p>
+        <p class="mb-2 break-all whitespace-normal">{{comment.message}}</p>
         <p class="mb-2 text-xs">{{moment(comment.createdAt).locale("id").format("DD-MM-YYYY")}}</p>
         <hr class="w-full"/>
       </div>
@@ -212,11 +220,11 @@ Dosen       </a>
     return{
         moment: moment,
     Logo,
+    showModal: false,
     vote,
     commentList:[],
     errorMessage:"",
     feedbackList:[],
-    // moment: moment,
         meta: {
           page: 1,
           size: "",
@@ -266,8 +274,11 @@ Dosen       </a>
       feedbackList() {
       return this.feedback.lists;
     },
-    profileList() {
+  profileList() {
       return this.Profile.list;
+    },
+    profileRole() {
+      return this.Profile.data;
     },
       errorCauseFeedback() {
         return this.feedback.errorCause;
@@ -286,10 +297,19 @@ Dosen       </a>
       this.getComplaintDetail();
       this.getComment();
       this.getFeedback();
-      this.getProfileLecturer();
+      this.profile();
+
 
     },
   methods: {
+       closeModal() {
+    this.showModal = false;
+    console.log('Modal telah ditutup'); // tambahkan console log di sini
+  },
+      modal(){
+        this.showModal = true;
+    console.log(this.showModal,"modal")
+    },
  loginStudent() {
       this.$router.push('/login');
   },
@@ -450,12 +470,19 @@ Dosen       </a>
     async getFeedback() {
       await this.getFeedbackList(this.$route.params.id);
     },
-    async getProfileLecturer() {
+ async getProfileLecturer() {
    return this.Profile.getProfileLecturer();
  },
  async profile() {
    await this.getProfileLecturer();
  },
+    //  async getprofile() {
+    //   return this.Profile.getProfile();
+    // },
+    // async profilestudent() {
+    //   await this.getprofile();
+    // },
+
       // async getUpdateActivity(id) {
       //   return this.notif.getActivityListUpdate(id);
       // },
@@ -470,19 +497,10 @@ Dosen       </a>
     },
   }
   </script>
-  
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
   h3 {
     margin: 40px 0 0;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
   }
   .toast-container {
   position: fixed;
@@ -495,6 +513,22 @@ Dosen       </a>
   top: 20px;
   right: 20px;
   z-index: 9999;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 }
 .toast {
   padding: 10px 20px;

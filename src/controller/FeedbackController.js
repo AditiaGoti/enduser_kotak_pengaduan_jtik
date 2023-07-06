@@ -25,6 +25,7 @@ export class FeedbackController {
           }
     
         async createFeedback(complaint_id,message) {
+           try{ 
             const token = localStorage.getItem('kpjtik_access_token')
             console.log(token,"token")
             setBearerTokenLecturer(token);
@@ -34,5 +35,13 @@ export class FeedbackController {
                   });
                   console.log("respon",response)
             return response
+                }
+                catch(error){
+                    this.setErrorCause(error.response.data.message)
+                    throw error
+                }
+        }
+        setErrorCause(cause) {
+            this.errorCause = cause
         }
 }

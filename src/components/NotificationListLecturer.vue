@@ -1,6 +1,9 @@
 <template>
       
-    <button id="dropdownNotificationButton"  v-if="isLoggedIn" data-dropdown-toggle="dropdownNotification" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-blue-900 focus:outline-none" type="button"> 
+    <button 
+    v-if="isLoggedIn" 
+    @click="toggleDropdown" 
+    class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-blue-900 focus:outline-none" type="button"> 
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
     <div class="relative flex">
   <div v-if="NotificationData.unOpened > 0">
@@ -14,8 +17,8 @@
 
     </button>
     <!-- Dropdown menu -->
-    <div id="dropdownNotification" class="z-20 hidden w-64 h-10 max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
-    <div class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
+    <div v-if="isDropdownOpen" class="absolute z-50 bottom-0 top-14 w-64 h-10 right-20 max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" >
+    <div class="block px-4 py-2 font-bold text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
       Notifications
     </div>
     <div class="notification-container" style="max-height: 200px; overflow-y: auto;">
@@ -68,6 +71,7 @@ data() {
      size: "",
    },
    notif: "yes",
+   isDropdownOpen: false,
    notif: new NotificationController(false, false, ""),
  };
 },
@@ -109,6 +113,9 @@ methods: {
         item:"",
       });
     },
+  toggleDropdown(){
+    this.isDropdownOpen = !this.isDropdownOpen
+  },
  async getNotificationlistLecturer(page, size) {
    return this.notif.getNotificationlistLecturer(page, size);
  },

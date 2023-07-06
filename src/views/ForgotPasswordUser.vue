@@ -60,7 +60,7 @@
     data() {
       return {
         auth: new AuthControllers(false, false, ""),
-        nip: "",
+        nim: "",
         vote,
         errorMessage:""
       };
@@ -100,8 +100,18 @@
             this.$router.push("/");
           }, 2000);
         }) .catch((error) => {
-          if(this.nim == ""){
+          if(this.nim === ""){
           this.errorMessage = "NIM Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+          if(this.errorCause === "Data tidak ditemukan!"){
+          this.errorMessage = "NIM Tidak Terdaftar";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -112,7 +122,7 @@
           }, 2000);       }
 
           else {
-              this.errorMessage = "NIM Tidak Terdaftar";
+              this.errorMessage = "Terjadi Kesalahan Pada Sistem";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;

@@ -5,17 +5,11 @@
     <div class="flex justify-end px-4 pt-4">
     </div>
     <div class="flex flex-col items-center pb-10">
-      <div v-if="profileList.avatar === null || profileList.avatar === ''">
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="Profiles"/>
-      </div>
-      <div>
-        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="profileList.avatar" />
-      </div>
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{profileList.name}}</h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.email}}</span>
-        <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.major}}</span>
-        <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.nim}}</span>
-        <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.phoneNumber}}</span>
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="profileLecturer.avatar" alt="Bonnie image"/>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{profileLecturer.name}}</h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400">{{profileLecturer.email}}</span>
+        <span class="text-sm text-gray-500 dark:text-gray-400">{{profileLecturer.nip}}</span>
+        <span class="text-sm text-gray-500 dark:text-gray-400">{{profileLecturer.phoneNumber}}</span>
 
         <div class="flex mt-4 space-x-3 md:mt-6">
           <router-link to="/editprofile">
@@ -34,7 +28,6 @@
 <script>
 import Logo from "@/assets/img/PENGADUAN.png";
 import { ProfileController } from "@/controller/ProfileController.js";
-import Profiles from "@/assets/img/profile.svg";
 
 export default {
   name: 'HelloWorld',
@@ -45,20 +38,18 @@ export default {
 {
   return{
   Logo,
-  Profiles,
   Profile: new ProfileController(false, false, ""),
   }
 },
 created() {
-    this.profile();
+    this.ProfileLecturer();
 
   },
   computed: {
     isError() {
       return this.Profile.error;
     },
-    profileList() {
-      console.log(this.profileList,"profile")
+    profileLecturer(){
       return this.Profile.list;
     },
     errorCause() {
@@ -70,11 +61,11 @@ created() {
     },
   },
   methods: {
-    async getprofile() {
-      return this.Profile.getProfile();
+     async getProfileLecturer() {
+      return this.Profile.getProfileLecturer();
     },
-    async profile() {
-      await this.getprofile();
+    async ProfileLecturer() {
+      await this.getProfileLecturer();
     },
   },
 }

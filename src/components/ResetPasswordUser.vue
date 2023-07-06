@@ -91,7 +91,8 @@
     data() {
       return {
         auth: new AuthControllers(false, false, ""),
-        nip: "",
+        nim: "",
+        newPassword:"",
         vote,
         errorMessage:""
       };
@@ -130,7 +131,7 @@
         .then(() => {
           const toast = document.createElement("div");
           toast.className = "toast toast-success";
-          toast.innerHTML = "Berhasil Mengirim";
+          toast.innerHTML = "Berhasil Mengubah Password";
 
           const toastContainer = document.querySelector(".toast-container");
           toastContainer.appendChild(toast);
@@ -150,7 +151,7 @@
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
-          else if(this.nim == ""){
+          else if(this.nim === ""){
           this.errorMessage = "NIM Tidak Boleh Kosong";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
@@ -160,7 +161,7 @@
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
-          else if(this.newPassword == ""){
+          else if(this.newPassword === ""){
           this.errorMessage = "Password Tidak Boleh Kosong";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
@@ -170,7 +171,28 @@
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
+          else if (!/^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()+=._-]{8,}$/.test(this.newPassword)) {
+        this.errorMessage = "Password Harus terdiri dari 1 huruf besar dan minimal 8 karakter";
+        const toast = document.createElement("div");
+        toast.className = "toast toast-error";
+        toast.innerHTML = this.errorMessage;
+        const toastContainer = document.querySelector(".toast-container");
+        toastContainer.appendChild(toast);
 
+        setTimeout(() => {
+          toastContainer.removeChild(toast);
+        }, 2000);
+      }
+        else if(this.errorCause === "Data tidak ditemukan!"){
+          this.errorMessage = "NIM Tidak Terdaftar";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
           else {
               this.errorMessage = "Terjadi Kesalahan, Reset Password Gagal";
           const toast = document.createElement("div");

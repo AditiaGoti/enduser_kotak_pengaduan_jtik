@@ -26,10 +26,9 @@
                   </label>
                   <input
                   v-model="nip"
-                  id="nim"
                     type="number"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Nip"
+                    placeholder="NIP"
                   />
                 </div>
   <div class="toast-container"></div>
@@ -100,8 +99,8 @@
             this.$router.push("/");
           }, 2000);
         }) .catch((error) => {
-             if(this.nip == "" && this.password==""){
-          this.errorMessage = "NIP dan Password Tidak Boleh Kosong";
+          if(this.errorCause === "Data tidak ditemukan!"){
+          this.errorMessage = "NIP Tidak Terdaftar";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -110,6 +109,7 @@
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
+
           else if(this.nip == ""){
           this.errorMessage = "Nip Tidak Boleh Kosong";
           const toast = document.createElement("div");
@@ -122,7 +122,7 @@
           }, 2000);       }
 
           else {
-              this.errorMessage = "Nip Tidak Terdaftar";
+              this.errorMessage = "Terjadi Kesalahan Pada Sistem";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;

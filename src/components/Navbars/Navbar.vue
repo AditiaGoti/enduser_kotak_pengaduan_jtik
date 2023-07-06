@@ -70,7 +70,7 @@
           </li>
 </router-link>
 </div>
-          <router-link to="/tanggapan">
+          <router-link to="/tanggapankeluhan">
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
@@ -82,13 +82,28 @@
               Tanggapan
             </a>
           </li>
+          
+          </router-link>
+          <router-link to="/keluhanpublikasi">
+          <li class="flex items-center">
+            <a
+              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
+              href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus?ref=vn-index-navbar"
+            >
+              <i
+                class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
+              />
+              Keluhan
+            </a>
+          </li>
+          
           </router-link>
           <li class="flex items-center">
             <button
               class="bg-blue-800 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
               type="button"
-              data-modal-target="crypto-modal" data-modal-toggle="crypto-modal"
-              v-if="!isLoggedIn"
+              :onClick="modal"
+                v-if="!isLoggedIn"
             >
               <i class="fas fa-arrow-alt-circle-down"></i> Masuk
             </button>
@@ -100,77 +115,19 @@
           <notification/>
           </li>
           <li class="flex item-center" >
-            <div class="flex items-center md:order-2">
-          <div
-  class="hidden-arrow flex cursor-pointer items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-  v-if="isLoggedIn"
-  id="user-drop"
-  data-te-dropdown-toggle-ref
-  aria-expanded="false"
->
-  <!-- User avatar -->
-  <img
-    :src="profileList.avatar" 
-    class="w-8 h-8 rounded-full"
-    alt=""
-    loading="lazy"
-  />
-</div>
-
-         <ul
-          class="absolute z-[1000] m-0 mt-1 hidden min-w-max list-none rounded-lg border-black bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
-          aria-labelledby="user-drop"
-          data-te-dropdown-menu-ref>
-           <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white">{{profileList.name }}</span>
-          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{profileList.email}}</span>
-        </div>
-          <!-- Second dropdown menu items -->
-            <li>
-            <router-link to="/profile">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
-            </router-link>
-          </li>
-          <li>
-            <a href="#" @click="toComplaintUser(profileList._id)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Complaint</a>
-          </li>
-          <li>
-            <a :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-          </li>
-        </ul>
-      <!-- Dropdown menu -->
-      <!-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-        <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white">{{profileList.name }}</span>
-          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{profileList.email}}</span>
-        </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <router-link to="/profile">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
-            </router-link>
-          </li>
-          <li>
-            <a href="#" @click="toComplaintUser(profileList._id)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Complaint</a>
-          </li>
-          <li>
-            <a :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-          </li>
-        </ul>
-      </div> -->
-        <!-- <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-        </button> -->
-        </div>
+            <div v-if="isLoggedIn">
+              <dropdown-profile/>
+            </div>
           </li>
         </ul>
 <!-- Main modal -->
-<div id="crypto-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+ <div class="modal-backdrop" v-if="showModal"></div>
+<div v-if="showModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="modal-backdrop"></div>
+    <div class="modal w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-blue-800 rounded-lg shadow">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="crypto-modal">
+            <button type="button" :onClick="closeModal" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                 <span class="sr-only">Close modal</span>
             </button>
@@ -238,16 +195,12 @@ import { NotificationController } from "@/controller/NotificationController.js";
 import { ProfileController } from "@/controller/ProfileController.js";
 import { removeAuth } from "@/Utils/localstorage";
 import notification from '@/components/NotificationListStudent.vue'
-
-import {
-  Dropdown,
-  initTE,
-  Collapse
-} from "tw-elements";
-initTE({ Dropdown,Collapse});
+import dropdownProfile from '@/components/Dropdown/userdropdown.vue'
+import { createPopper } from "@popperjs/core";
 export default {
   components:{
     notification,
+    dropdownProfile,
   },
   data() {
     return {
@@ -256,8 +209,11 @@ export default {
         page: 1,
         size: "",
       },
+      showModal: false,
       notif: "yes",
       isLoggedIn: false,
+      dropdownPopoverShow: false,
+      dropdownPopoverShowLeft: false,
       notif: new NotificationController(false, false, ""),
       Profile: new ProfileController(false,false,""),
     };
@@ -296,6 +252,28 @@ export default {
     loginStudent() {
       this.$router.push('/login');
   },
+   toggleDropdown: function (event) {
+      event.preventDefault();
+      if (this.dropdownPopoverShow) {
+        this.dropdownPopoverShow = false;
+      } else {
+        this.dropdownPopoverShow = true;
+        createPopper(this.$refs.btnDropdownRef, this.$refs.popoverDropdownRef, {
+          placement: "bottom-start",
+        });
+      }
+    },
+       toggleDropdownProfile: function (event) {
+      event.preventDefault();
+      if (this.dropdownPopoverShowLeft) {
+        this.dropdownPopoverShowLeft = false;
+      } else {
+        this.dropdownPopoverShowLeft = true;
+        createPopper(this.$refs.btnDropdownReffprofile, this.$refs.popoverDropdownReffprofile, {
+          placement: "bottom-start",
+        });
+      }
+    },
   loginLecturer() {
       this.$router.push('/loginlecturer');
   },
@@ -306,14 +284,13 @@ export default {
         params: { id: Index },
       });
     },
-    logout() {
-      this.loadingStatus = true;
-      setTimeout(removeAuth(), 3500);
-      localStorage.clear();
-      window.location.reload();
-      this.$router.push("/");
-
+    modal(){
+        this.showModal = true;
+    console.log(this.showModal,"modal")
     },
+      closeModal() {
+    this.showModal = false;
+  },
     async getNotificationlist(page, size) {
       return this.notif.getNotificationlist(page, size);
     },
@@ -326,20 +303,25 @@ export default {
     async profile() {
       await this.getprofile();
     },
-    // async getUpdateActivity(id) {
-    //   return this.notif.getActivityListUpdate(id);
-    // },
-    // async getUpdateStatus(id) {
-    //   await this.getUpdateActivity(id);
-    //   this.getActivity();
-    // },
-    // setNotification() {
-    //   setNotif(this.notip);
-      
-    // },
   },
-  // created() {
-  //   this.setNotification();
-  // },
 };
 </script>
+<style>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+</style>

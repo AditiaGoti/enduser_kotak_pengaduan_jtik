@@ -164,6 +164,7 @@ export default {
       .then(response => {
         localStorage.setItem('kpjtik_access_token', response.data.data.accessToken)
         localStorage.setItem('kpjtik_acc_name', response.data.data.name)
+        // localStorage.setItem('kpjtik_acc_password', response.data.data.password)
         localStorage.setItem('kpjtik_id', response.data.data._id)
         localStorage.setItem('kpjtik_email', response.data.data.email)
         localStorage.setItem('kpjtik_nim', response.data.data.nim)

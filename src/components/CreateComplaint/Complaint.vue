@@ -27,16 +27,23 @@
         <p class="mb-3">Silakan masukan judul keluhan anda dan isi dari keluhan anda</p>
 <form class="text-left">
   <div class="mb-6">
-    <label for="judul" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Judul Keluhan</label>
+    <label for="judul" class="block mb-2 text-sm font-bold text-gray-900 dark:text-black">Judul Keluhan</label>
     <input type="text" v-model="title" @change="emitCreateComplaint" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="masukan judul disini" required>
   </div>
   <div class="mb-6">   
-<label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-blacke">Isi Keluhan</label>
+<label for="message" class="block mb-2 text-sm font-bold text-gray-900 dark:text-blacke">Keluhan yang ingin disampaikan</label>
 <textarea v-model="body" rows="4" @change="emitCreateComplaint" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukan isi keluhan"></textarea>
   </div>
   <div class="mb-6">
-    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Foto</label>
-    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="attachmentImage" alt="Bonnie image"/>
+    <label  class="block mb-2 text-sm font-bold text-gray-900 dark:text-black">Foto</label>
+    <div v-if="attachmentImage === null || attachmentImage === ''">
+          <img class="mb-3 shadow-lg" :src="Image" alt=""/>
+    </div>
+    <div v-else>
+      <div class="border-2 shadow-lg mb-3 ">
+    <img class="" :src="attachmentImage" alt=""/>
+      </div>
+    </div>
     <input type="file" class="text-left" @change="handleFileUpload" accept="image/*">
   </div>
   <div class="mb-3">
@@ -46,11 +53,15 @@
   <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Send As Anonym ?</span>
 </label>
   </div>
+        <div class="toast-container"></div>
+
 </form>
 </div>
 </template>
 <script>
 import Logo from "@/assets/img/PENGADUAN.png";
+import Image from "@/assets/img/photo.svg";
+
 import { ProfileController } from "@/controller/ProfileController.js";
 import { ComplaintController } from "@/controller/ComplaintController.js";
 
@@ -61,24 +72,29 @@ export default {
   },
   data() {
     return {
+      meta: {
+        page: 1,
+        size: "",
+      },
       Logo,
+      Image,
+      errorMessage:"",
       complaint: new ComplaintController(false, false, ""),
       Profile: new ProfileController(false, false, ""),
       title: "",
       body: "",
-      file: null,
+      file: "",
       base64: '',
       attachmentImage:"",
-      imageFolder:'complaint',
       createdBy: ""
     }
   },
-  created() {
+  created(){
     this.profile();
   },
   computed: {
     profileList() {
-      return this.Profile.lists;
+      return this.Profile.list;
     },
     createdBy: {
       get() {
@@ -89,27 +105,43 @@ export default {
       }
     }
   },
+   watch: {
+    createdBy(newValue) {
+      console.log(newValue); // Log the value of createdBy
+    },},
   methods: {
    
-    async handleFileUpload(event) {
+ async handleFileUpload(event) {
+  const maxFileSize = 2 * 1024 * 1024; // 2MB
   const file = event.target.files[0];
-  console.log("file", file.type);
-  const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
-  
-  if (file && allowedFormats.includes(file.type)) {
-    const imageUrl = URL.createObjectURL(file); // Convert File object to a data URL
-    this.attachmentImage = imageUrl;
 
-    const response = await this.complaint.uploadImageComplaint(
-      this.attachmentImage,
-      this.imageFolder
-    );
+  if (file.size > maxFileSize) {
+          this.errorMessage = "Gagal Menggunakan Gambar, Ukuran Gambar Maksimal 2Mb";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
 
-    console.log(response, "response");
-    return response;
-  } else {
-    alert("Accepted file formats are: jpg, jpeg, png");
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+              return;
   }
+
+  let formData = new FormData();
+  this.file = file;
+  formData.append('image', this.file);
+  formData.append('imageFolder', 'complaint');
+
+  const responseUploadImage = await this.complaint.uploadImageComplaint({ data: formData });
+  this.setattachmentImage(responseUploadImage.data.data);
+
+  console.log(responseUploadImage.data.data);
+  return responseUploadImage;
+},
+setattachmentImage(data){
+  this.attachmentImage = data
 },
 
     emitCreateComplaint() {
@@ -118,14 +150,38 @@ export default {
       this.$emit('selected-body', this.body);
       this.$emit('handleFileUpload', this.attachmentImage);
       this.$emit('selected-createdBy', this.createdBy);
-      this.$emit("selected-attachment", this.attachmentImage);
     },
-    async getprofile() {
+  async getprofile() {
       return this.Profile.getProfile();
     },
     async profile() {
       await this.getprofile();
-    }
+            this.createdBy = this.profileList.name;
+
+    },
   }
 };
 </script>
+<style>
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+  .toast {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: white;
+    opacity: 0.9;
+  }
+
+  .toast-success {
+    background-color: #2ecc71;
+  }
+  .toast-error {
+  background-color: red;
+  }
+</style>

@@ -37,6 +37,7 @@ export class AuthControllers {
         return response
     }
     async forgotPassLecturer(nip) {
+        try {
         this.setLoading(true)
         setBasicAuthLecturer();
         const response = await axiosInstancelecturer.post('/lecturer/v1/password/forget', {
@@ -44,17 +45,29 @@ export class AuthControllers {
               });
         console.log("test",response)
         return response
+            }
+            catch(error){
+                this.setErrorCause(error.response.data.message)
+                throw error; // Rethrow the error to propagate it to the caller
+            }
     }
     async forgotPassStudent(nim) {
+       try{
         this.setLoading(true)
         setBasicAuth();
         const response = await axiosInstance.post('/student/v1/password/forget', {
                 nim: nim,
               });
-        console.log("test",response)
-        return response
+              this.setErrorCause("")
+              return response
+            }
+            catch(error){
+                this.setErrorCause(error.response.data.message)
+                throw error; // Rethrow the error to propagate it to the caller
+            }
     }
     async resetPassStudent(nim,forgetPasswordToken,newPassword) {
+        try {
         this.setLoading(true)
         setBasicAuth();
         const response = await axiosInstance.post('/student/v1/password/reset', {
@@ -64,78 +77,64 @@ export class AuthControllers {
               });
         console.log("test",response)
         return response
+            }
+            catch(error){
+                this.setErrorCause(error.response.data.message)
+                throw error; // Rethrow the error to propagate it to the caller
+            }
     }
     async resetPassLecturer(nip,forgetPasswordToken,newPassword) {
+       try {
         this.setLoading(true)
-        setBasicAuth();
+        setBasicAuthLecturer();
         const response = await axiosInstancelecturer.post('/lecturer/v1/password/reset', {
-                nim: nip,
+                nip: nip,
                 forgetPasswordToken : forgetPasswordToken,
                 newPassword : newPassword
               });
         console.log("test",response)
         return response
+            }
+            catch(error){
+                this.setErrorCause(error.response.data.message)
+                throw error; // Rethrow the error to propagate it to the caller
+            }
     }
 
     async changePassStudent(oldPassword,newPassword) {
-        const token = localStorage.getItem('kpjtik_access_token')
-        console.log(token,"token")
-        setBearerToken(token);
-              const response = await axiosInstance.put('/student/v1/password/change',{
-                oldPassword : oldPassword,
-                newPassword : newPassword,
-              });
-        return response
+        try {
+            const token = localStorage.getItem('kpjtik_access_token');
+            console.log(token, "token");
+            setBearerToken(token);
+            const response = await axiosInstance.put('/student/v1/password/change', {
+              oldPassword: oldPassword,
+              newPassword: newPassword,
+            });
+            this.setErrorCause("")
+            return response;
+          } catch (error) {
+            // Handle the error here
+            this.setErrorCause(error.response.data.message)
+            throw error; // Rethrow the error to propagate it to the caller
+          }
     }
 
-    resetPasswordStudent(email) {
-        let resp = null
-        this.setLoading(true)
-        resp = ResetPasswordRequest(email)
-            .then((response) => {
-                this.setResetPassDetail(response.data)
-                this.setErrorCause("")
-                this.setError(false)
-                return true
-            }).catch((err) => {
-                if (err.response.data.message == "Access token expired!") {
-                    this.setErrorCause(err)
-                    this.setError(true)
-                    sessionExpired()
-                } else {
-                    this.setErrorCause(err.response.data.message)
-                    this.setError(true)
-                }
-                return false
-            }).finally(() => {
-                this.setLoading(false)
-            })
-        return resp
-    }
-
-    changePasswordStudent(oldPassword, newPassword, confirmationPassword) {
-        let resp = null
-        this.setLoading(true)
-        resp = ChangePasswordRequest(oldPassword, newPassword, confirmationPassword)
-            .then((response) => {
-                this.setChangePassDetail(response.data)
-                this.setErrorCause("")
-                this.setError(false)
-                return true
-            }).catch((err) => {
-                if (err.response.data.message == "Access token expired!") {
-                    this.setErrorCause(err)
-                    this.setError(true)
-                    sessionExpired()
-                } else {
-                    this.setErrorCause(err.response.data.message)
-                    this.setError(true)
-                }
-                return false
-            }).finally(() => {
-                this.setLoading(false)
-            })
-        return resp
+    async changePassLecturer(oldPassword,newPassword) {
+        try {
+            const token = localStorage.getItem('kpjtik_access_token');
+            console.log(token, "token");
+            setBearerTokenLecturer(token);
+            const response = await axiosInstancelecturer.put('/lecturer/v1/password/change', {
+              oldPassword: oldPassword,
+              newPassword: newPassword,
+            });
+            this.setErrorCause("")
+            return response;
+          } catch (error) {
+            // Handle the error here
+            this.setErrorCause(error.response.data.message)
+            throw error; // Rethrow the error to propagate it to the caller
+          }
     }
     setResponse(data) {
         this.response = data
@@ -148,12 +147,6 @@ export class AuthControllers {
     setChangePassStudentDetail(data) {
         this.changePassDetail = data
     }
-
-
-    setLoginStudentDetail(token, name, nim, email) {
-        setAuthentication(token, name, nim, email)
-    }
-
 
     setLoading(status) {
         this.loading = status

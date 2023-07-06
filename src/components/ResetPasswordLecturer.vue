@@ -69,7 +69,7 @@
                 <div class="text-center mt-6">
             
                   <button
-                  :onClick="resetPasswordStudent"
+                  :onClick="ResetPasswordLecturer"
                     class="bg-white text-blue-800 active:bg-blueGray-600 text-md font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
                   >
@@ -94,6 +94,7 @@ import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
       return {
         auth: new AuthControllers(false, false, ""),
         nip: "",
+        newPassword:"",
         vote,
         errorMessage:""
       };
@@ -114,6 +115,9 @@ import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
         return this.showPassword ? "Hide" : "Show";
       },
     },
+    mounted(){
+      console.log(this.$route.query.forgetPasswordToken,"token")
+    },
     methods: {
       async doReset(nip,forgetPasswordToken,newPassword) {
         return this.auth.resetPassLecturer(
@@ -129,14 +133,14 @@ import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
         .then(() => {
           const toast = document.createElement("div");
           toast.className = "toast toast-success";
-          toast.innerHTML = "Berhasil Mengirim";
+          toast.innerHTML = "Berhasil Mengubah Password";
 
           const toastContainer = document.querySelector(".toast-container");
           toastContainer.appendChild(toast);
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/login");
+            this.$router.push("/loginlecturer");
           }, 2000);
         }) .catch((error) => {
              if(this.nip == "" && this.newPassword==""){
@@ -149,8 +153,8 @@ import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
-          else if(this.nip == ""){
-          this.errorMessage = "Nip Tidak Boleh Kosong";
+          else if(this.nip === ""){
+          this.errorMessage = "NIP Tidak Boleh Kosong";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -159,8 +163,30 @@ import { ResetPasswordLecturer } from '@/api/Endpoint/Index';
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
-          else if(this.newPassword == ""){
+          else if(this.newPassword === ""){
           this.errorMessage = "Password Tidak Boleh Kosong";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
+           else if (!/^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()+=._-]{8,}$/.test(this.newPassword)) {
+        this.errorMessage = "Password Harus terdiri dari 1 huruf besar dan minimal 8 karakter";
+        const toast = document.createElement("div");
+        toast.className = "toast toast-error";
+        toast.innerHTML = this.errorMessage;
+        const toastContainer = document.querySelector(".toast-container");
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+          toastContainer.removeChild(toast);
+        }, 2000);
+      }
+        else if(this.errorCause === "Data tidak ditemukan!"){
+          this.errorMessage = "NIP Tidak Terdaftar";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;

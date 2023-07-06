@@ -1,5 +1,20 @@
 <template>
   <div class="hello mt-16">
+  <div v-if ="isLoggedIn">
+    <div v-if="profileList.email === null">
+    <div v-if="isAlertVisible" id="alert-2" class="flex p-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+  <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+  <span class="sr-only">Info</span>
+  <div class="ml-3 text-sm font-medium">
+    Tolong Lengkapi Biodata Anda!! Email dibutuhkan Untuk Reset Password <router-link to="/editprofile" class="font-semibold underline hover:no-underline">Click to Edit Profile</router-link>
+  </div>
+<button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close" @click="closeAlert">
+    <span class="sr-only">Close</span>
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  </button>
+</div>
+    </div>
+  </div>
   <div class="text-left mb-5 bg-blue-800 rounded shadow py-6">
     <div class="ml-36">
 <h1 class="mb-4 text-2xl font-extrabold text-gray-900 text-white md:text-2xl lg:text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-white from-sky-400 mr-2">KOTAK PENGADUAN</span>JTIK</h1>
@@ -43,7 +58,7 @@ import Logo from "@/assets/img/PENGADUAN.png";
 import { ComplaintController } from "@/controller/ComplaintController.js";
 import Keluhanlist from '@/components/KeluhanList.vue'
 import KeluhanPopular from '@/components/KeluhanPopular.vue'
-
+import { ProfileController } from "@/controller/ProfileController.js";
 import FeedbackKeluhan from '@/components/FeedbackKeluhanList.vue'
 
 export default {
@@ -67,6 +82,9 @@ export default {
       },
       complaint: "yes",
       complaint: new ComplaintController(false, false, ""),
+      Profile: new ProfileController(false, false, ""),
+      isAlertVisible: true,
+
   }
 },
 computed:{
@@ -79,7 +97,10 @@ computed:{
     errorCause() {
       return this.complaint.errorCause;
     },
-
+    profileList() {
+      // console.log(this.profileList,"profile")
+      return this.Profile.list;
+    },
     isLoading() {
       return this.complaint.loading;
     },
@@ -92,23 +113,21 @@ mounted() {
     this.getComplaint();
   },
 methods: {
+  closeAlert() {
+    this.isAlertVisible = false;
+  },
     async getComplaintList(page, size) {
       return this.complaint.getComplaintList(page, size);
     },
     async getComplaint() {
       await this.getComplaintList(this.meta.page, this.meta.size);
     },
-    // async getUpdateActivity(id) {
-    //   return this.notif.getActivityListUpdate(id);
-    // },
-    // async getUpdateStatus(id) {
-    //   await this.getUpdateActivity(id);
-    //   this.getActivity();
-    // },
-    // setNotification() {
-    //   setNotif(this.notip);
-      
-    // },
+     async getprofile() {
+      return this.Profile.getProfile();
+    },
+    async profile() {
+      await this.getprofile();
+    },
   },
 }
 </script>

@@ -20,6 +20,13 @@ export class ComplaintController {
               return response
               
           }
+          async getFeedbackComplaintList() {
+            setBasicAuth();
+                  const response = await axiosInstance.get('/v1/complaint?status=Responded')
+                  this.setLists(response.data.data.list);
+                  return response
+                  
+              }
           setLists(data) {
             this.lists = data
         }
@@ -39,7 +46,7 @@ export class ComplaintController {
             setChanceControl();
             const response = await axiosInstance.get(`/v1/complaint?complaint_id=${id}`);
             this.setLists(response.data.data.list[0]);
-            console.log(response.data.data.list[0].lecturer_type )
+            console.log(response.data.data.list[0])
             return response;
           }     
           setLists(data) {
@@ -65,17 +72,14 @@ async createComplaint(category_id, lecturer_type, createdBy, title, body, attach
     return response;
   }
   
-  async uploadImageComplaint(image,imageFolder){
+  async uploadImageComplaint(data){
     setBasicAuth();
-    const response = await axiosInstance.post('/student/v1/upload',{
-      image : image,
-      imageFolder : imageFolder
-    });
-    this.setLists([{ key: 'attachmentImage', value: 'https://storage.googleapis.com/kotak-pengaduanjtik.appspot.com/' + response.data}]);
+    const response = await axiosInstance.post('/student/v1/upload',
+      data.data
+    );
     console.log(response.data, 'upload');
     return response;
   }
-  
   setLists(data) {
     this.lists = data
   }
@@ -94,11 +98,19 @@ async createComplaint(category_id, lecturer_type, createdBy, title, body, attach
     async getComplaintListLecturer() {
             const token = localStorage.getItem('kpjtik_access_token')
             setBearerTokenLecturer(token);                  
-            const response = await axiosInstancelecturer.get(`/lecturer/v1/complaint`)
+            const response = await axiosInstancelecturer.get(`/lecturer/v1/complaint?status=Published`)
                   this.setLists(response.data.data.list);
                   console.log(response.data.data.list,"list complaint")
                   return response
               }
+              async getFeedbackList() {
+                const token = localStorage.getItem('kpjtik_access_token')
+                setBearerTokenLecturer(token);                  
+                const response = await axiosInstancelecturer.get(`/lecturer/v1/complaint?status=Responded`)
+                      this.setLists(response.data.data.list);
+                      console.log(response.data.data.list,"list complaint")
+                      return response
+                  }
               setLists(data) {
                   this.lists = data
               }

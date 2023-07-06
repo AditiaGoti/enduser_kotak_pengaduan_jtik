@@ -15,7 +15,10 @@ import ResetPass from '../views/ResetPassword.vue'
 import ResetPassLect from '../views/ResetPassLecturer.vue'
 import Keluhan from '../views/Keluhan.vue'
 import KeluhanLecturer from '../views/KeluhanLecturer.vue'
+import KeluhanUser from '../views/KeluhanMahasiswa.vue'
 import Tanggapan from '../views/Tanggapan.vue'
+import TanggapanKeluhan from '../views/KeluhanResponded.vue'
+
 const routes = [
   {
     path: '/login',
@@ -88,8 +91,8 @@ const routes = [
     component: CreateComplaint
   },
   {
-    path: '/keluhan/:id',
-    name: 'keluhan',
+    path: '/keluhanpublikasi',
+    name: 'keluhanpublikasi',
     component: Keluhan
   },
   {
@@ -98,9 +101,19 @@ const routes = [
     component: KeluhanLecturer
   },
   {
+    path: '/keluhanmahasiswa',
+    name: 'keluhanmahasiswa',
+    component: KeluhanUser
+  },
+  {
     path: '/tanggapan',
     name: 'tanggapan',
     component: Tanggapan
+  },
+  {
+    path: '/tanggapankeluhan',
+    name: 'tanggapankeluhan',
+    component: TanggapanKeluhan
   },
   {
     path: '/about',

@@ -191,7 +191,7 @@ methods: {
           }});
     },
     async ChangePass(oldPassword, newPassword) {
-      return this.auth.changePassStudent(
+      return this.auth.changePassLecturer(
         oldPassword,
         newPassword,
       );

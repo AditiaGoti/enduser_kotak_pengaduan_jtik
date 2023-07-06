@@ -38,7 +38,7 @@
     
      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
        <router-link
-     to="/keluhan"
+     to="/keluhanpublikasi"
      >
        <li class="flex items-center">
          <a
@@ -81,51 +81,18 @@
         <notification/>
        </li>
        <li class="flex item-center" >
-         <div class="flex items-center md:order-2">
-   <button type="button" v-if="isLoggedIn" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-     <span class="sr-only">Open user menu</span>
-     <img class="w-8 h-8 rounded-full" :src="profileList.avatar" alt="user photo">
-   </button>
-   <!-- Dropdown menu -->
-   <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-     <div class="px-4 py-3">
-       <span class="block text-sm text-gray-900 dark:text-white">{{profileList.name }}</span>
-       <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{profileList.email}}</span>
-     </div>
-     <ul class="py-2" aria-labelledby="user-menu-button">
-       <li>
-         <router-link to="/profile">
-         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
-         </router-link>
-       </li>
-       <li>
-         <router-link to="/keluhanlecturer">
-         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Complaint</a>
-         </router-link>
-       </li>
-       <li>
-         <router-link to="/tanggapan">
-         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Feedback</a>
-         </router-link>
-       </li>
-       <li>
-         <a :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+         <div class="flex items-center md:order-2" v-if="isLoggedIn">
+          <dropdown-profile/>
+       </div>
        </li>
      </ul>
-   </div>
-     <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-     <span class="sr-only">Open main menu</span>
-     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-     </button>
-     </div>
-       </li>
-     </ul>
-     <!-- Main modal -->
-<div id="crypto-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+      <div class="modal-backdrop" v-if="showModal"></div>
+<div v-if="showModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="modal-backdrop"></div>
+    <div class="modal w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-blue-800 rounded-lg shadow">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="crypto-modal">
+            <button type="button" :onClick="closeModal" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                 <span class="sr-only">Close modal</span>
             </button>
@@ -182,6 +149,7 @@ Dosen       </a>
         </div>
     </div>
 </div>
+
    </div>
  </div>
 </nav>
@@ -192,10 +160,12 @@ import { NotificationController } from "@/controller/NotificationController.js";
 import { ProfileController } from "@/controller/ProfileController.js";
 import { removeAuth } from "@/Utils/localstorage";
 import notification from '@/components/NotificationListLecturer.vue'
+import dropdownProfile from '@/components/Dropdown/lecturerDropdown.vue'
 
 export default {
 components:{
-  notification
+  notification,
+  dropdownProfile
 },
 data() {
  return {
@@ -204,6 +174,7 @@ data() {
      page: 1,
      size: "",
    },
+  showModal: false,
    notif: "yes",
    notif: new NotificationController(false, false, ""),
    Profile: new ProfileController(false,false,""),
@@ -218,15 +189,6 @@ computed: {
 const token = localStorage.getItem('kpjtik_access_token');
 return token !== null && token !== '';
 },
-//  isError() {
-//    return this.notif.error;
-//  },
-//  NotificationList() {
-//    return this.notif.list;
-//  },
-//  errorCause() {
-//    return this.notif.errorCause;
-//  },
  profileList() {
    return this.Profile.list;
  },
@@ -241,17 +203,25 @@ mounted() {
 this.getProfileLecturer();
 },
 methods: {
- logout() {
-   this.loadingStatus = true;
+     logout() {
+      this.loadingStatus = true;
       setTimeout(removeAuth(), 3500);
       localStorage.clear();
-      // window.location.reload();
-      this.$router.push("/");
-
- },
+      this.$router.push({
+        path:'/'
+      });
+    },
  async getNotificationlistLecturer(page, size) {
    return this.notif.getNotificationlistLecturer(page, size);
  },
+   closeModal() {
+    this.showModal = false;
+    console.log('Modal telah ditutup'); // tambahkan console log di sini
+  },
+      modal(){
+        this.showModal = true;
+    console.log(this.showModal,"modal")
+    },
  async getNotifList() {
    await this.getNotificationlistLecturer(this.meta.page, this.meta.size);
  },
@@ -261,20 +231,25 @@ methods: {
  async profile() {
    await this.getProfileLecturer();
  },
- // async getUpdateActivity(id) {
- //   return this.notif.getActivityListUpdate(id);
- // },
- // async getUpdateStatus(id) {
- //   await this.getUpdateActivity(id);
- //   this.getActivity();
- // },
- // setNotification() {
- //   setNotif(this.notip);
-   
- // },
 },
-// created() {
-//   this.setNotification();
-// },
 };
 </script>
+<style>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+</style>

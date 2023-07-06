@@ -3,7 +3,7 @@
       <navbar/>
       <KeluhanFeedback/>
       <!-- <keluhan/> -->
-    </div>
+  </div>
   </template>
   
   <script>
@@ -11,13 +11,16 @@
   import Navbar from '@/components/Navbars/Navbar.vue'
   // import Keluhan from '@/components/KeluhanUser.vue'
   import KeluhanFeedback from '@/components/FeedbackKeluhanList.vue'
+  import Footer from '@/components/Footer/footer.vue'
+
   
   export default {
     name: 'HomeView',
     components: {
       Navbar,
       // Keluhan,
-      KeluhanFeedback
+      KeluhanFeedback,
+      Footer
     }
   }
   </script>

@@ -1,4 +1,4 @@
-import axiosInstance,{setBearerToken} from '../Utils/axios'
+import axiosInstance,{setBearerToken,setBasicAuth} from '../Utils/axios'
 import axiosInstancelecturer,{setBasicAuthLecturer,setBearerTokenLecturer} from '../Utils/axiosLecturer'
 
 export class ProfileController {
@@ -8,6 +8,7 @@ export class ProfileController {
     response = []
     lists = []
     list = []
+    data = []
     constructor(loading, error, errorCause) {
         this.loading = loading
         this.error = error
@@ -18,7 +19,7 @@ export class ProfileController {
         const token = localStorage.getItem('kpjtik_access_token')
         setBearerToken(token);
               const response = await axiosInstance.get('/student/v1/profile')
-            //   console.log(response.data.data,"data")
+              console.log(response.data.data.name,"data")
               this.setLists(response.data.data);
 
         return response
@@ -43,17 +44,22 @@ export class ProfileController {
         return response
         
     }
-    async uploadImageProfile(){
-        setBasicAuth();
-        const response = await axiosInstance.post('/student/v1/upload', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-        this.setLists([{ key: 'attachmentImage', value: 'https://storage.googleapis.com/kotak-pengaduanjtik.appspot.com/' + response.data}]);
-        console.log(response.data, 'upload');
-        return response;
-      }
+    async uploadImageProfile(data){
+    setBasicAuth();
+    const response = await axiosInstance.post('/student/v1/upload',
+      data.data
+    );
+    console.log(response.data, 'upload');
+    return response;
+  }
+  async uploadImageProfileLecturer(data){
+    setBasicAuth();
+    const response = await axiosInstancelecturer.post('/lecturer/v1/upload',
+      data.data
+    );
+    console.log(response.data, 'upload');
+    return response;
+  }
     setLists(data) {
         this.lists = data
         console.log(this.lists);
@@ -63,20 +69,24 @@ export class ProfileController {
         setBearerTokenLecturer(token);
               const response = await axiosInstancelecturer.get('/lecturer/v1/profile')
               this.setLists(response.data.data);
-              console.log("profile lecture", response.data.data.lecturer_type)                
+              this.setData(response.data.data.lecturerType.LT_name)
+              console.log("role",response.data.data.lecturerType.LT_name)
+              console.log("profile lecture", response.data.data)                
         return response
         
     }
     setLists(data) {
         this.list = data
     }
-    async updateProfileLecturer(avatar,name,nim,phoneNumber,email,) {
+    setData(data){
+      this.data = data
+    }
+    async updateProfileLecturer(avatar,name,phoneNumber,email,) {
         const token = localStorage.getItem('kpjtik_access_token')
         setBearerTokenLecturer(token);
               const response = await axiosInstancelecturer.put('/lecturer/v1/profile',{
                 avatar : avatar,
                 name : name,
-                nim : nim,
                 phoneNumber : phoneNumber,
                 email : email,
               })

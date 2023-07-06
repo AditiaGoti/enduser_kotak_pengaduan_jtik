@@ -1,10 +1,9 @@
 <template>
   <div class="mt-24 px-36">
     <p class="font-sans text-2xl text-left font-bold mb-4 underline">Tanggapan</p>
-    <div>
+    <div v-if="ComplaintList.length > 0">
       <div
-        v-if="publishedComplaints.length > 0"
-        v-for="complaint in publishedComplaints"
+        v-for="complaint in visibleComplaintList"
         :key="complaint._id"
         class="border-none flex flex-col h-46 hover:bg-gray-100"
         @click="toComplaintDetail(complaint._id)"
@@ -25,6 +24,15 @@
         </div>
         <hr class="my-2 w-full font-bold" />
       </div>
+       <div v-if="visibleComplaintCount < ComplaintList.length">
+  <button class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="loadMore">
+    Muat Lebih Banyak
+  </button>
+</div>
+<div v-else>
+  <!-- Display other content when the ComplaintList length reaches the maximum -->
+</div>
+    </div>
       <div v-else>
         <!-- No complaints message -->
         <div class="flex justify-center border-none mt-36">
@@ -35,7 +43,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -59,6 +66,8 @@ export default {
         page: 1,
         size: "",
       },
+      visibleComplaintList: [],
+      visibleComplaintCount: 5,
       complaint: new ComplaintController(false, false, ""),
       Profile: new ProfileController(false,false,""),
 
@@ -83,15 +92,12 @@ export default {
     // lecturerType() {
     //   return this.profileList.lecturer_type; // Assuming you have the lecturer_type in the profileList
     // },
-    publishedComplaints() {
-      return this.ComplaintList.filter(
-        (complaint) => complaint.status === "Responded"
-      );
-    },
   },
   mounted() {
-    this.getComplaint();
-    console.log(this.complaint, "complaint"); // Add this line to log the complaint data
+    this.getComplaint().then(() => {
+    this.updateVisibleComplaintList();
+  });
+        this.updateVisibleComplaintList();
   },
   methods: {
     toComplaintDetail(Index) {
@@ -102,17 +108,25 @@ export default {
         item: "",
       });
     },
-    async getComplaintListLecturer(page, size) {
-      return this.complaint.getComplaintListLecturer(page, size);
+    async getFeedbackList(page, size) {
+      return this.complaint.getFeedbackList(page, size);
     },
     async getComplaint() {
-      await this.getComplaintListLecturer(this.meta.page, this.meta.size);
+      await this.getFeedbackList(this.meta.page, this.meta.size);
     },
     async getProfileLecturer() {
       return this.Profile.getProfileLecturer();
     },
     async profile() {
       await this.getProfileLecturer();
+    },
+     loadMore() {
+  this.visibleComplaintCount += 5;
+  this.updateVisibleComplaintList();
+},
+
+     updateVisibleComplaintList() {
+      this.visibleComplaintList = this.ComplaintList.slice(0, this.visibleComplaintCount);
     },
     truncateText(text, limit) {
       if (text.split(" ").length > limit) {

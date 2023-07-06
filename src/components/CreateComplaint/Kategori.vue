@@ -30,31 +30,42 @@
         <p class="text-sm mb-5"> Pilih kategori pengaduan yang sesuai dengan konten pengaduan yang anda sampaikan </p>
         
         <div class="flex flex-col">
-            <div class="text-sm flex flex-row justify-between mx-24 mb-3">
-                <div :class="{'image-selected': selectedCategory === 1, 'click-selected': clickedCategory === 1}" class="cursor-pointer" id="1" @click="handleCategoryClick(1)">
-    <img class="w-16 h-16 mb-3 rounded-full shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 rounded-full" :src="Logo" alt="Bonnie image"/>
+            <div class="text-sm flex flex-row justify-between mx-24 mb-3" >
+                <div :class="{'image-selected active': selectedCategory === 1, 'click-selected active': clickedCategory === 1}" class="cursor-pointer  focus:ring-4 focus:outline-none focus:ring-blue-300" id="1" @click="handleCategoryClick(1)">
+    <button type="button" class="rounded-full shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 border-none focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center mr-2 mb-2">
+        <img  :src="Akademik" alt="Akademik"/>
+    </button>
     <p>Akademik</p>
+
                 </div>
-                <div :class="{'image-selected': selectedCategory === 2}" class="cursor-pointer ml-36" id="2" @click="handleCategoryClick(2)">
-                    <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
-                    <p>Fasilitas / Layanan</p>
+                <div :class="{'image-selected active': selectedCategory === 2}" class="cursor-pointer ml-36" id="2" @click="handleCategoryClick(2)">
+                     <button type="button" class="ml-2 rounded-full w-14 h-14 shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 border-none focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center mr-2 mb-2">
+                        <img class="p-4"  :src="Layanan" alt="Layanan"/>
+                    </button>
+                    <p>Fasilitas/Layanan</p>
                 </div>
             </div>
             
             <div class="text-sm flex flex-row justify-between mx-24">
                 <div :class="{'image-selected': selectedCategory === 3}" class="cursor-pointer" id="3" @click="handleCategoryClick(3)">
-                    <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
+                     <button type="button" class="rounded-full w-14 h-14 shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 border-none focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center mr-2 mb-2">
+        <img class="p-4" :src="Kemahasiswaan" alt="Kemahasiswaan"/>
+    </button>
                     <p>Kemahasiswaan</p>
                 </div>
                 <div :class="{'image-selected': selectedCategory === 4}" class="cursor-pointer" id="4" @click="handleCategoryClick(4)">
-                    <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
+                     <button type="button" class="rounded-full w-14 h-14 shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 border-none focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center mr-2 mb-2">
+        <img  class="p-4" :src="Keuangan" alt="Keuangan"/>
+    </button>
                     <p>Keuangan</p>
                 </div>
             </div>
             
             <div class="text-sm flex flex-row justify-between mx-24 mb-3">
                 <div :class="{'image-selected': selectedCategory === 5}" class="cursor-pointer mt-4" id="5" @click="handleCategoryClick(5)">
-                    <img class="w-16 h-16 mb-3 rounded-full border-4 outline hover:outline-2 hover:outline-blue-800 shadow-lg" :src="Logo" alt="Bonnie image"/>
+                     <button type="button" class="rounded-full w-14 h-14 shadow-lg border-4 outline hover:outline-2 hover:outline-blue-800 border-none focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center mr-2 mb-2">
+        <img class="" :src="Logo" alt="lainlain"/>
+    </button>
                     <p>Lain Lain</p>
                 </div>
             </div>
@@ -74,6 +85,10 @@
 
 <script>
 import Logo from "@/assets/img/PENGADUAN.png";
+import Akademik from "@/assets/img/akademik.svg";
+import Kemahasiswaan from "@/assets/img/kemahasiswaan.svg";
+import Layanan from "@/assets/img/layanan.svg";
+import Keuangan from "@/assets/img/finance.svg";
 
 export default {
   name: 'KetegoriKeluhan',
@@ -82,6 +97,7 @@ export default {
 {
   return{
   Logo,
+  Akademik,Kemahasiswaan,Layanan,Keuangan
   }
 },
 methods: {
@@ -91,3 +107,14 @@ methods: {
     },
 }
 </script>
+<style>
+.image-selected.active {
+  border: 2px solid blue;
+  outline-color: blue;
+
+}
+
+.active {
+  outline-color: blue;
+}
+</style>

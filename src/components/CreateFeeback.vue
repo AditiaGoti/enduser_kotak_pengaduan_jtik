@@ -1,7 +1,7 @@
 <template>
       <div class="flex flex-col border-2 rounded-md bg-gray-100 px-2 py-3" >
   <div class="text-md mt-1 ml-14 mb-3">
-<h1><span class="font-bold">Harap berhati-hati dalam memberi tanggapan.</span>Komentar yang sudah dikirim tidak dapat dihapus kembali.</h1>
+<h1><span class="font-bold">Harap berhati-hati dalam memberi tanggapan.</span>Tanggapan yang sudah dikirim tidak dapat dihapus kembali.</h1>
      </div>            
             <div class="flex flex-row mx-10 mb-4 ">
     <div>
@@ -24,13 +24,6 @@
             </div>
     </div>
     <div class="toast-container"></div>
-    <!-- </div>
-    <div v-if="ComplaintDetail.status === 'Published'">
-
-    </div>
-    <div v-else>
-
-    </div> -->
 </template>
 <script>
   import Logo from "@/assets/img/PENGADUAN.png";
@@ -176,7 +169,7 @@
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/");
+            this.$router.push("/lecturer");
           }, 2000);
         })
         .catch((error) => {
@@ -191,7 +184,32 @@
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);
-          } else {
+          } 
+          else if(this.errorCauseFeedback === "Jabatan tidak sesuai!"){
+          this.errorMessage = "Gagal Mengirim Tanggapan, Keluhan bukan untuk anda";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          }
+          else if(this.errorCauseFeedback === "Keluhan telah ditanggapi oleh creator"){
+          this.errorMessage = "Gagal Mengirim Tanggapan, Keluhan sudah ditanggapi";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);
+          }
+          else {
             this.errorMessage = "Terjadi kesalahan saat Membuat Tanggapan";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";

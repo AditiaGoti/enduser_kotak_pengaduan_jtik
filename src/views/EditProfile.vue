@@ -1,13 +1,15 @@
 <template>
   <div class="home">
-    <div v-if="profileList.type > 0">
+    <div v-if="profileList.lecturer_type > 0">
       <NavbarLecturer/>
     </div>
     <div v-else>
       <navbar/>
     </div>
     <edit-profile />
-  </div>
+<div class="item-center  mx-3">
+         <Footer/>
+      </div>  </div>
 </template>
 
 <script>
@@ -16,6 +18,7 @@ import EditProfile from '@/components/EditProfileUser.vue'
 import Navbar from '@/components/Navbars/Navbar.vue'
 import NavbarLecturer from '@/components/Navbars/NavbarLecturer.vue'
 import { ProfileController } from "@/controller/ProfileController.js";
+import Footer from '@/components/Footer/footer.vue'
 
 export default {
   name: 'HomeView',
@@ -23,6 +26,7 @@ export default {
     EditProfile,
     Navbar,
     NavbarLecturer,
+    Footer
   },
   data() {
     return {
