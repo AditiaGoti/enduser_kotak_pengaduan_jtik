@@ -33,9 +33,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/">
             <a href="#" :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-            </router-link>
           </li>
         </ul>
     </div>
@@ -82,12 +80,11 @@ export default {
     logout() {
       this.loadingStatus = true;
       setTimeout(() => {
-      removeAuth()
-      this.$router.push("/");
-          }, 3500);
-      localStorage.clear();
-      
-
+    localStorage.clear();
+    removeAuth();
+    location.reload();
+    this.$router.push("/");
+  }, 2000);
     },
     async getprofile() {
       return this.Profile.getProfile();

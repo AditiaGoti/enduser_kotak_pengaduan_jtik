@@ -17,7 +17,10 @@
     <p class="font-bold text-md text-blue-600	">Sudah Ditanggapi</p>
   </div>
   <div v-else-if="ComplaintDetail.status === 'Moderated'">
-    <p class="font-bold text-md text-red-600	">Tanggapan Dalam Moderasi</p>
+    <p class="font-bold text-md text-green-600	">Pengaduan Dalam Moderasi</p>
+  </div>
+  <div v-else-if="ComplaintDetail.status === 'Published'">
+    <p class="font-bold text-md text-yellow-600	">Publikasi</p>
   </div>
   <div v-else>
     <p class="font-bold text-md text-red-600	">Belum Ditanggapi</p>

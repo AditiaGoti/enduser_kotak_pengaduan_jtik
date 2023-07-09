@@ -115,7 +115,7 @@ export default {
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/");
+            this.$router.push("/keluhanmahasiswa");
           }, 2000);
         })
         .catch((error) => {

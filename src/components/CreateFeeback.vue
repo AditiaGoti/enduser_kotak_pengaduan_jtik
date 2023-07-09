@@ -169,7 +169,7 @@
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/lecturer");
+            this.$router.push("/tanggapan");
           }, 2000);
         })
         .catch((error) => {

@@ -24,7 +24,25 @@
            <p class="text-left font-semibold text-sm">
           {{complaint.category}}
           </p>
+          
           </div>
+          <div class="mb-3 uppercase">
+          <div v-if="complaint.status === 'Published'">
+          <p class="text-left text-red-600 font-semibold text-sm">
+          Belum Ditanggapi
+          </p>
+        </div>  
+         <div v-if="complaint.status === 'Moderated'">
+          <p class="text-left text-green-600 font-semibold text-sm">
+          Dalam Moderasi
+          </p>
+        </div>  
+        <div v-if="complaint.status === 'Responded'">
+          <p class="text-left text-blue-600 font-semibold text-sm">
+          Ditanggapi
+          </p>
+        </div>  
+    </div>
           <div class="flex">
            <div> 
           <a href="#" class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -35,7 +53,7 @@
           </div>
           </div>
     </div>
-        <hr class="font-bold w-[700px] mb-3" />
+        <hr class="font-bold mb-3" />
     </div>
 <div v-if="visibleComplaintCount < ComplaintList.length">
   <button class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="loadMore">

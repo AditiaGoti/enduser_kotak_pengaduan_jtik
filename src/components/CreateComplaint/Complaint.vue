@@ -44,7 +44,7 @@
     <img class="" :src="attachmentImage" alt=""/>
       </div>
     </div>
-    <input type="file" class="text-left" @change="handleFileUpload" accept="image/*">
+  <input type="file" class="text-left" @change="handleFileUpload" accept="image/*">
   </div>
   <div class="mb-3">
   <label class="relative inline-flex items-center mb-4 cursor-pointer">
@@ -136,12 +136,13 @@ export default {
 
   const responseUploadImage = await this.complaint.uploadImageComplaint({ data: formData });
   this.setattachmentImage(responseUploadImage.data.data);
+  this.$emit('handleFileUpload', this.attachmentImage);
 
   console.log(responseUploadImage.data.data);
   return responseUploadImage;
 },
 setattachmentImage(data){
-  this.attachmentImage = data
+    this.attachmentImage = data;
 },
 
     emitCreateComplaint() {
