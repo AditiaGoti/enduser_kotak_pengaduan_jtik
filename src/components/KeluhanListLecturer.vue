@@ -1,6 +1,6 @@
 <template>
     <div class="mt-24 px-36">  
-    <p class="font-sans text-2xl text-left font-bold mb-4 text-black underline ">Keluhan Pengguna</p>
+    <p class="font-sans text-2xl text-left font-bold mb-4 text-black underline ">Pengaduan Pengguna</p>
   <div v-if="ComplaintList.length > 0">
 <div v-for="(complaint) in visibleComplaintList" :key="complaint._id" class="mb-4 border-none hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
     <div class="flex flex-row my-1 hover:bg-gray-100 ">
@@ -63,7 +63,7 @@
         <div class="flex justify-center border-none mt-36">
   <div class="mb-4"><img :src="vote" class="w-32" alt="..."></div>
 </div>
-<div class="mb-8 text-xl font-semibold text-black"><p>Belum Terdapat Keluhan</p></div>
+<div class="mb-8 text-xl font-semibold text-black"><p>Belum Terdapat Pengaduan</p></div>
       </div>
     </div>
   </template>

@@ -1,8 +1,9 @@
 <template>
-  <div class="relative ml-32 mr-10 w-[700px] border-8 rounded-lg mb-3">
+  <div class="relative ml-32 mr-10 w-[700px] border-none rounded-lg mb-3">
    <div class="carousel" data-fb-carousel>
   <!-- Carousel items -->
   <div class="carousel-inner">
+ <div v-if="complaintList.length > 0">
     <div
       v-for="(complaint, index) in complaintList"
       :key="index"
@@ -16,6 +17,20 @@
         <p>{{ complaint.body }}</p>
       </div>
     </div>
+ </div>
+ <div v-else>
+  <div class="flex flex-col item-center">
+    <div>
+      <img :src="vote" class="block w-64 px-5 ml-64 mb-2 py-2" :alt="vote" />
+    </div>
+    <div>
+      <!-- <div class="carousel-caption text-left cursor-pointer" @click="toComplaintDetail(complaint._id)"> -->
+      <div class="mb-8 text-xl font-semibold text-black"><p>Belum Terdapat Pengaduan Popular</p></div>
+    <!-- </div> -->
+        <!-- <p>{{ complaint.body }}</p> -->
+      </div>
+    </div>
+ </div>
   </div>
 
   <!-- <a class="carousel-control-prev" role="button" data-fb-slide="prev">
@@ -49,6 +64,7 @@ import Logo from "@/assets/img/PENGADUAN.png";
 import { ComplaintController } from "@/controller/ComplaintController.js";
 import Keluhanlist from "@/components/KeluhanList.vue";
 import FeedbackKeluhan from "@/components/FeedbackKeluhanList.vue";
+  import vote from "@/assets/img/voting.png";
 
 export default {
   name: "HelloWorld",
@@ -62,6 +78,7 @@ export default {
   data() {
     return {
       Logo,
+      vote,
       meta: {
         page: 1,
         size: "",

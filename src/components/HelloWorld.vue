@@ -25,7 +25,7 @@
               class="bg-white text-blue-600 active:bg-blue-800 text-xs font-bold uppercase px-4 py-2 my-3 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 mb-3 ease-linear transition-all duration-150"
               type="button"
             >
-              <i class="fas fa-arrow-alt-circle-down"></i> Buat Keluhan
+              <i class="fas fa-arrow-alt-circle-down"></i> Buat Pengaduan
             </button>
           </router-link>
           </div>
@@ -35,7 +35,7 @@
               class="bg-white text-blue-600 active:bg-blue-800 text-xs font-bold uppercase px-4 py-2 my-3 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 mb-3 ease-linear transition-all duration-150"
               type="button"
             >
-              <i class="fas fa-arrow-alt-circle-down"></i> Buat Keluhan
+              <i class="fas fa-arrow-alt-circle-down"></i> Buat Pengaduan
             </button>
           </router-link>
           </div>
@@ -43,6 +43,8 @@
   </div>
   <div class="flex flex-row">
   <div class="flex flex-col">
+  <p class="font-bold text-2xl mb-2 underline decoration-2 text-left ml-32 "> Pengaduan Popular </p>
+
 <keluhan-popular/>
 <keluhanlist />
   </div>

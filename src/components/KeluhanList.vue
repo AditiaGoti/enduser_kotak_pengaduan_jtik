@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-  <p class="font-bold text-2xl mb-2 underline decoration-2 text-left ml-32 "> Keluhan Pengguna </p>
+  <p class="font-bold text-2xl mb-2 underline decoration-2 text-left ml-32 "> Pengaduan Pengguna </p>
   <div v-if="ComplaintList.length > 0" >
 <div v-for="(complaint) in visibleComplaintList" :key="complaint._id" class="ml-28 mb-4 border-none w-[700px] hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
     <div class="flex flex-row " >

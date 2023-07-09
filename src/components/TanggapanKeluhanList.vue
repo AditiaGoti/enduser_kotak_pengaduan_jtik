@@ -46,7 +46,7 @@
 
     </div>
                       <hr class="my-2 w-full font-bold" />
-
+      </div>
          <div v-if="visibleComplaintCount < ComplaintList.length">
   <button class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="loadMore">
     Muat Lebih Banyak
@@ -55,7 +55,6 @@
 <div v-else>
   <!-- Display other content when the ComplaintList length reaches the maximum -->
 </div>
-      </div>
       </div>
       <div v-else>
         <div class="flex justify-center border-none">

@@ -1,7 +1,7 @@
 <template>
     <div class="mt-24 flex flex-col items-center border-none mb-10">
       <div class="flex font-bold text-left">
-        <p class="text-xl">Buat Keluhan</p>
+        <p class="text-xl">Buat Pengaduan</p>
       </div>
       <div>
         <component

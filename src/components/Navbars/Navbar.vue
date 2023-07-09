@@ -49,7 +49,7 @@
               <i
                 class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
               />
-              Buat Keluhan
+              Buat Pengaduan
             </a>
           </li>
 </router-link>
@@ -65,7 +65,7 @@
               <i
                 class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
               />
-              Buat Keluhan
+              Buat Pengaduan
             </a>
           </li>
 </router-link>
@@ -93,7 +93,7 @@
               <i
                 class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
               />
-              Keluhan
+              Pengaduan
             </a>
           </li>
           

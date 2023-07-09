@@ -1,6 +1,6 @@
 <template>
     <div class="mt-24 px-36">
-    <p class="font-sans text-2xl text-left font-bold mb-4 text-black underline ">Tanggapan Keluhan</p>
+    <p class="font-sans text-2xl text-left font-bold mb-4 text-black underline ">Tanggapan Pengaduan</p>
       <div v-if="ComplaintList.length > 0 ">
       <div
         v-for="complaint in visibleComplaintList"
