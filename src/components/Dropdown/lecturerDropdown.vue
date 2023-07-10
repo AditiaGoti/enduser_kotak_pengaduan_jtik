@@ -86,9 +86,10 @@ export default {
       this.loadingStatus = true;
       setTimeout(() => {
       removeAuth()
-      this.$router.push("/");
-          }, 3500);
       localStorage.clear();
+      this.$router.push("/");
+      location.reload();
+          }, 3500);
       
 
     },

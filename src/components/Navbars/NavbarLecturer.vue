@@ -8,7 +8,7 @@
    <div
      class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
    >
-           <router-link to="/Lecturer">
+           <router-link to="/">
     <div class="flex flex-row">
      <div>
            <img :src="vote" class="w-8 h-8 mr-1"/>

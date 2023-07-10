@@ -1,37 +1,32 @@
 <template>
     <div class="mt-24 px-36">
     <p class="font-sans text-2xl text-left font-bold mb-4 text-black underline ">Tanggapan Pengaduan</p>
-      <div v-if="ComplaintList.length > 0 ">
+      <div v-if="FeedbackList.length > 0 ">
       <div
-        v-for="complaint in visibleComplaintList"
-        :key="complaint._id"
+        v-for="feedback in FeedbackList"
+        :key="feedback._id"
         class="mb-4 border-none w-full hover:bg-gray-100"
-        @click="toComplaintDetail(complaint._id)"
+        @click="toComplaintDetail(feedback.complaint._id)"
       >
         <div class="flex flex-row my-1 hover:bg-gray-100 ">
         <img
-        :src="complaint.attachmentImage"
         class="w-[200px] h-48 m-4 mx-12"
             />
         <div class="flex flex-col py-3">
-        <p class="text-left font-bold text-lg mb-1">{{ complaint.lecturer_type}} </p>
+        <p class="text-left font-bold text-lg mb-1">{{feedback.lecturer.name}}</p>
         <p class="text-left  font-bold text-xl">
-            {{ complaint.title }}
+            {{feedback.complaint.title}}
           </p>
           <p class="text-left  font-bold text-xl">
           </p>
  <p class="text-justify mr-2 text-md mt-1 text-ellipsis overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
-            {{ complaint.body }}
+            {{ feedback.message }}
           </p>             <div class="flex flex-row mb-2">
-           <p class="text-left text-sm">{{ moment(complaint.createdAt).locale("id").format("DD-MM-YYYY") }}</p>
-           <p class="text-left text-sm relative bottom-0.5 px-2"> | </p>
-           <p class="text-left font-semibold text-sm">
-          {{complaint.category}}
-          </p>
+           <p class="text-left text-sm">{{ moment(feedback.createdAt).locale("id").format("DD-MM-YYYY") }}</p>
           </div>
           <div class="mb-3 uppercase">
           <p class="text-left text-blue-600 font-semibold text-sm">
-          {{complaint.status}}
+          {{feedback.status}}
           </p>
     </div>
           <div class="flex">
@@ -47,7 +42,7 @@
     </div>
                       <hr class="my-2 w-full font-bold" />
 
-         <div v-if="visibleComplaintCount < ComplaintList.length">
+         <div v-if="visibleComplaintCount < FeedbackList.length">
   <button class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="loadMore">
     Muat Lebih Banyak
   </button>
@@ -61,7 +56,7 @@
         <div class="flex justify-center border-none">
   <div class="mb-4"><img :src="vote" class="w-16" alt="..."></div>
 </div>
-<div class="mb-8 text-md font-semibold text-black"><p>Belum Terdapat Keluhan</p></div>
+<div class="mb-8 text-md font-semibold text-black"><p>Belum Terdapat Tanggapan</p></div>
 <hr class="my-2 font-bold" />
       </div>
     </div>
@@ -69,7 +64,7 @@
   
   <script>
   import Logo from "@/assets/img/PENGADUAN.png";
-  import { ComplaintController } from "@/controller/ComplaintController.js";
+  import { FeedbackController } from "@/controller/FeedbackController";
   import moment from "moment";
   import vote from "@/assets/img/voting.png";
   export default {
@@ -84,32 +79,33 @@
         vote,
         meta: {
           page: 1,
-          size: "",
+          limit: "",
         },
         visibleComplaintList: [],
       visibleComplaintCount: 5,
-        complaint: new ComplaintController(false, false, ""),
+        feedback: new FeedbackController(false, false, ""),
       };
     },
     computed: {
       isError() {
-        return this.complaint.error;
+        return this.feedback.error;
       },
-      ComplaintList() {
-        return this.complaint.lists;
+      FeedbackList() {
+        return this.feedback.lists;
       },
       errorCause() {
-        return this.complaint.errorCause;
+        return this.feedback.errorCause;
       },
       isLoading() {
-        return this.complaint.loading;
+        return this.feedback.loading;
       },
     },
     mounted() {
-           this.getComplaint().then(() => {
+           this.getFeedback().then(() => {
     this.updateVisibleComplaintList();
   });
         this.updateVisibleComplaintList();
+        this.getFeedback();
     },
     methods: {
       toComplaintDetail(Index) {
@@ -126,21 +122,14 @@
 },
 
      updateVisibleComplaintList() {
-      this.visibleComplaintList = this.ComplaintList.slice(0, this.visibleComplaintCount);
+      this.visibleComplaintList = this.FeedbackList.slice(0, this.visibleComplaintCount);
     },
-      async getFeedbackComplaintList(page, size) {
-        return this.complaint.getFeedbackComplaintList(page, size);
+        async getFeedbackLecturer(page, limit) {
+        return this.feedback.getFeedbackLecturer(page, limit);
       },
-      async getComplaint() {
-        await this.getFeedbackComplaintList(this.meta.page, this.meta.size);
+      async getFeedback() {
+        await this.getFeedbackLecturer(this.meta.page, this.meta.limit);
       },
-      truncateText(text, limit) {
-      if (text.split(" ").length > limit) {
-        const words = text.split(" ");
-        return words.slice(0, limit).join(" ") + "...";
-      }
-      return text;
-    },
     },
   };
   </script>

@@ -26,12 +26,9 @@
                   </label>
                   <input
                   v-model="nip"
-                  id="nim"
-                    type="number"
+                    type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Nip"
-                    @focus="focus"
-                @keyup.enter="loginAction"
                   />
                 </div>
 
@@ -49,12 +46,6 @@
                     type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Password"
-                    @focus="focus"
-                @keyup.enter="loginAction"
-                :class="{
-                  'outline-blue-input': !errorMsg.password,
-                  'outline-red-star': errorMsg.password,
-                }"
                   />
                   <input
                   v-model="password"
@@ -63,12 +54,6 @@
                     type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Password"
-                    @focus="focus"
-                @keyup.enter="loginAction"
-                :class="{
-                  'outline-blue-input': !errorMsg.password,
-                  'outline-red-star': errorMsg.password,
-                }"
                   />
                 </div>
               
@@ -142,19 +127,8 @@
         return this.showPassword ? "Hide" : "Show";
       },
     },
-    watch: {
-      nip(value) {
-        // binding this to the data value in the email input
-        this.nim = value;
-        this.validatenip(value);
-      },
-      password(value) {
-        this.password = value;
-        this.validatePassword(value);
-      },
-    },
     methods: {
-      async doLogin(nip, password) {
+       async doLogin(nip, password) {
         return this.auth.signInLecturer(nip, password);
         },
       async LoginLecturer() {
@@ -174,9 +148,9 @@
 
           setTimeout(() => {
             toastContainer.removeChild(toast);
-            this.$router.push("/");
+          this.$router.push("/");
           }, 2000);
-        }) .catch((error) => {
+         }) .catch(() => {
              if(this.nip == "" && this.password==""){
           this.errorMessage = "NIP dan Password Tidak Boleh Kosong";
           const toast = document.createElement("div");
@@ -209,7 +183,7 @@
             toastContainer.removeChild(toast);
           }, 2000);       }
           else {
-              this.errorMessage = "Nim atau password salah";
+              this.errorMessage = "NIP atau password salah";
           const toast = document.createElement("div");
           toast.className = "toast toast-error";
           toast.innerHTML = this.errorMessage;
@@ -222,9 +196,6 @@
       },
       loginAction() {
         this.LoginLecturer();
-      },
-      focus() {
-        this.validate.empty = false;
       },
   
       toggleShow() {

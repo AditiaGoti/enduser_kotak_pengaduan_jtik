@@ -26,16 +26,16 @@ export class AuthControllers {
         return response
     }
 
-   async signInLecturer(nip, password) {
-        this.setLoading(true)
-        setBasicAuthLecturer();
-        const response = await axiosInstancelecturer.post('/lecturer/v1/login', {
-                nip: nip,
-                password: password,
-              });
-        console.log("test",response)
-        return response
-    }
+    async signInLecturer(nip, password) {
+      this.setLoading(true)
+      setBasicAuthLecturer();
+      const response = await axiosInstancelecturer.post('/lecturer/v1/login', {
+              nip: nip,
+              password: password,
+            });
+      console.log("test",response)
+      return response
+  }
     async forgotPassLecturer(nip) {
         try {
         this.setLoading(true)

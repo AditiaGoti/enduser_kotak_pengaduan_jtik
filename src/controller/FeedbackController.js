@@ -23,7 +23,14 @@ export class FeedbackController {
           setLists(data) {
               this.lists = data
           }
-    
+       async getFeedbackLecturer() {
+            const token = localStorage.getItem('kpjtik_access_token')
+            setBearerTokenLecturer(token);                  
+            const response = await axiosInstancelecturer.get(`/lecturer/v1/feedback`)
+            this.setLists(response.data.data.list);
+                  console.log(response.data.data.list,"list complaint")
+                  return response
+              }
         async createFeedback(complaint_id,message) {
            try{ 
             const token = localStorage.getItem('kpjtik_access_token')

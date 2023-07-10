@@ -19,7 +19,7 @@ export class ProfileController {
         const token = localStorage.getItem('kpjtik_access_token')
         setBearerToken(token);
               const response = await axiosInstance.get('/student/v1/profile')
-              console.log(response.data.data.name,"data")
+              console.log(response.data.data,"data")
               this.setLists(response.data.data);
 
         return response
