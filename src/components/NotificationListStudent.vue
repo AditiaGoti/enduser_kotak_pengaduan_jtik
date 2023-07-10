@@ -29,13 +29,13 @@
     <div v-if="notif.isOpened == null" >
       <!-- <input type="text"  v-model="notif._id" class="hidden"> -->
       <input v-model="notif._id" type="text" class=" hidden text-md text-left border-none break-words whitespace-normal mb-5" disabled />
-      <button href="#" class="flex px-4 py-3 text-left font-light bg-gray-400 text-black hover:bg-gray-100"
+      <button href="#" class="flex px-4 py-3 text-left font-light bg-blue-500 text-white hover:bg-black-100 hover:text-black"
       @click="updateStatusNotif(notif._id)">
         {{ notif.message }}
       </button>
     </div>
     <div v-else>
-      <a href="#" class="flex bg-white px-4 py-3 font-light text-black hover:bg-gray-100"
+      <a href="#" class="flex bg-gray-50 dark:bg-gray-800 dark:text-white px-4 py-3 font-light text-black hover:bg-gray-200"
       >
         {{ notif.message }}
       </a>

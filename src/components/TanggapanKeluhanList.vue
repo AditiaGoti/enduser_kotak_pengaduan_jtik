@@ -30,9 +30,11 @@
           </p>
           </div>
           <div class="mb-3 uppercase">
+            <div v-if="complaint.status === 'Responded'">
           <p class="text-left text-blue-600 font-semibold text-sm">
-          {{complaint.status}}
+            Sudah Ditanggapi
           </p>
+            </div>
     </div>
           <div class="flex">
            <div> 

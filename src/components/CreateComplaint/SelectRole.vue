@@ -26,9 +26,8 @@
 </ol>
 
         <p class="font-bold text-md my-3"> Kepada Siapa Pengaduan diajukan ? </p>
-        <p class="mb-3"> Pilih jabatan / Role yang ditujukan dalam penyampaian pengaduan</p>
+        <p class="mb-3"> Pilih jabatan yang ditujukan dalam penyampaian pengaduan</p>
         <div>
-<label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Role</label>
 <select id="countries" v-model="lecturer_type" @change="emitSelectedRole" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 menu">
   <option v-for="admin in adminList" :key="admin._id" :value="admin._id">{{ admin.name }}</option>
 </select>

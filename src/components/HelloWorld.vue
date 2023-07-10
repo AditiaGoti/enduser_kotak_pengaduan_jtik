@@ -18,7 +18,7 @@
   <div class="text-left mb-5 bg-blue-800 rounded shadow py-6">
     <div class="ml-36">
 <h1 class="mb-4 text-2xl font-extrabold text-gray-900 text-white md:text-2xl lg:text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-white from-sky-400 mr-2">KOTAK PENGADUAN</span>JTIK</h1>
-<p class="text-lg font-normal text-white lg:text-xl w-[500px]">Dengan Kotak Pengaduan JTIK, pengaduan Anda dapat langsung dibaca dan ditanggapi oleh role yang ditunjukan.</p>
+<p class="text-lg font-normal text-white lg:text-xl w-[500px]">Dengan Kotak Pengaduan JTIK, pengaduan Anda dapat langsung dibaca dan ditanggapi.</p>
             <div v-if="!isLoggedIn"> 
               <router-link to="/login">
             <button
