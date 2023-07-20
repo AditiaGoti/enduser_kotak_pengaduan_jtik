@@ -1,8 +1,8 @@
 <template>
-  <div class="hello mt-24 border-none mx-36 mb-10">
+  <div class="hello mt-24 border-none md:mx-36 mx-0 mb-10">
 <div class="flex flex-col">
   <div class="text-left mb-5 px-10 mt-3">
-    <p class="text-3xl font-bold text-black"> {{ComplaintDetail.title}} </p>
+    <p class="md:text-3xl text-md font-bold text-black"> {{ComplaintDetail.title}} </p>
     <div class="flex flex-row py-3">
     <p class="font-extralight text-sm">Publish at : {{moment(ComplaintDetail.createdAt).locale("id").format("DD-MM-YYYY")}}</p>
     <p class="mx-3 relative bottom-0.5 font-extralight"> | </p>
@@ -28,10 +28,10 @@
   </div>
     <hr class="mb-3 mx-10"/>
     <div class="flex justify-center border-none">
-  <div class="mb-8"><img :src="ComplaintDetail.attachmentImage" class="w-64" alt="..."></div>
+  <div class="mb-8"><img :src="ComplaintDetail.attachmentImage" class="md:w-64 w-36" alt="..."></div>
 </div>
     <div class="mb-3"> 
-    <p class="text-left px-10 text-md mt-1 break-words whitespace-normal">{{ ComplaintDetail.body }} </p>
+    <p class="text-left px-10 md:text-md mt-1 break-words whitespace-normal">{{ ComplaintDetail.body }} </p>
   </div>
   <div class="px-10 text-left  py-3 ">
     <p class="font-bold text-lg underline underline-offset-8 mb-3"> TANGGAPAN</p>

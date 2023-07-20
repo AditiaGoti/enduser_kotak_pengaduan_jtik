@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-24 flex flex-col items-center border-none ">
+  <div class="mt-24  md:px-0 px-5 flex flex-col items-center border-none ">
     
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-end px-4 pt-4">
@@ -11,7 +11,7 @@
       <div>
         <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="profileList.avatar" />
       </div>
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{profileList.name}}</h5>
+        <h5 class="mb-1 md:text-xl text-lg font-bold dium text-gray-900 dark:text-white">{{profileList.name}}</h5>
                 <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.email}}</span>
         <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.major}}</span>
         <span class="text-sm text-gray-500 dark:text-gray-400">{{profileList.nim}}</span>
@@ -19,10 +19,10 @@
 
         <div class="flex mt-4 space-x-3 md:mt-6">
           <router-link to="/editprofile">
-            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Profile</a>
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-bold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Profile</a>
           </router-link>
           <router-link to="/gantipassword"> 
-            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Ganti Password</a>
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-bold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Ganti Password</a>
           </router-link>
         </div>
     </div>

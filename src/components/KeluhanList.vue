@@ -1,32 +1,32 @@
 <template>
     <div class="flex flex-col">
-  <p class="font-bold text-2xl mb-2 underline decoration-2 text-left ml-32 "> Pengaduan Pengguna </p>
+  <p class="font-bold md:text-2xl text-md mb-2 underline decoration-2 text-left md:ml-32 ml-3 "> Pengaduan Pengguna </p>
   <div v-if="ComplaintList.length > 0" >
-<div v-for="(complaint) in visibleComplaintList" :key="complaint._id" class="ml-28 mb-4 border-none w-[700px] hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
+<div v-for="(complaint) in visibleComplaintList" :key="complaint._id" class="md:ml-28  ml-3 mb-4 border-none md:w-[700px] w-82 hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
     <div class="flex flex-row " >
         <img
         :src="complaint.attachmentImage"
-        class="w-[200px] h-48 m-6 mx-14"
+        class="md:w-[200px] md:h-48 md:m-6 md:mx-14 w-28 h-28 mx-2"
         />
-        <div class="flex flex-col py-3">
-        <p class="text-left font-bold text-lg mt-3 mb-1 uppercase">{{ complaint.division}} </p>
-        <p class="text-left  font-bold text-xl">
+        <div class="flex flex-col md:py-3 py-0 md:mb-0 mb-2">
+        <p class="text-left font-bold md:text-lg text-sm md:mt-3 mt-0 mb-1 uppercase">{{ complaint.division}} </p>
+        <p class="text-left  font-bold md:text-xl text-xs">
             {{ complaint.title }}
           </p>
-          <p class="text-left  font-bold text-xl">
+          <p class="text-left  font-bold md:text-xl text-xs ">
           </p>
-<p class="text-justify mr-2 text-md mt-1 text-ellipsis overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+<p class="text-justify mr-2 md:text-md text-xs mt-1 text-ellipsis overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
   {{ complaint.body }}
-</p>          <div class="flex flex-row mb-5">
-           <p class="text-left text-sm">{{ moment(complaint.createdAt).locale("id").format("DD-MM-YYYY") }}</p>
-           <p class="text-left text-sm relative bottom-0.5 px-2"> | </p>
-           <p class="text-left font-semibold text-sm">
+</p>          <div class="flex flex-row md:mb-5 mb-3">
+           <p class="text-left md:text-sm text-xs">{{ moment(complaint.createdAt).locale("id").format("DD-MM-YYYY") }}</p>
+           <p class="text-left md:text-sm text-xs relative bottom-0.5 px-2"> | </p>
+           <p class="text-left font-semibold md:text-sm text-xs">
           {{complaint.category}}
           </p>
           </div>
           <div class="flex">
            <div> 
-          <a href="#" class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <a href="#" class="inline-flex items-center px-3 text-white font-bold py-2 md:text-sm text-xs font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Read more
               <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           </a>
@@ -34,11 +34,11 @@
           </div>
           </div>
     </div>
-                      <hr class="font-bold w-[700px] mb-3" />
+                      <hr class="font-bold md:w-[700px] w-92 md:mx-0 mx-3 md:mb-3 mb-1" />
 
     </div>
     <div v-if="visibleComplaintCount < ComplaintList.length">
-  <button class="inline-flex items-center px-3 text-white font-bold py-2 text-sm font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="loadMore">
+  <button class="inline-flex items-center md:px-3 px-2 text-white font-bold py-2 md:text-sm text-xs mb-2 md:mb-0 font-medium text-center font-bold bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="loadMore">
     Muat Lebih Banyak
   </button>
 </div>
@@ -48,9 +48,9 @@
       </div>
       <div v-else>
         <div class="flex justify-center border-none">
-  <div class="mb-4"><img :src="vote" class="w-16" alt="..."></div>
+  <div class="mb-4"><img :src="vote" class="md:w-16 w-14" alt="..."></div>
 </div>
-<div class="mb-8 text-md font-semibold text-black"><p>Belum Terdapat Keluhan</p></div>
+<div class="mb-8 md:text-md text-sm font-semibold text-black"><p>Belum Terdapat Keluhan</p></div>
       </div>
     </div>
 

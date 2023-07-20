@@ -1,7 +1,7 @@
 <template>
     <div class="mt-1">
     <button
-      class="text-blueGray-500"
+      class="text-blueGray-500 md:block hidden"
       @click="toggleDropdown" 
     >
       <div class="items-center flex">
@@ -11,6 +11,42 @@
           />
       </div>
     </button>
+     <div class="flex justify-between md:hidden block">
+        <div>
+          <img
+          class="w-8 h-8 rounded-full"            
+          :src="profileList.avatar"
+          />
+          </div>
+          <div>
+          </div>
+             <div @click="toggleDropdownProfile" 
+    class="cursor-pointer text-xs uppercase py-3 font-bold block lg:hidden flex justify-end">
+   <i
+        v-if="isDropdownProfileOpen"
+        class="fas fa-chevron-up ml-2"
+      ></i>
+      <i
+        v-else
+        class="fas fa-chevron-down ml-2"
+      ></i>   
+             </div>
+             <ul v-if="isDropdownProfileOpen" class="text-left">
+              <li>
+            <router-link to="/profile">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/keluhanmahasiswa">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Pengaduan</a>
+            </router-link>
+          </li>
+          <li>
+            <a href="#" :onClick="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+          </li>
+    </ul>
+      </div>
     <div
       class="bg-white text-base list-none text-left rounded shadow-lg"
     
@@ -59,6 +95,8 @@ export default {
         size: "",
       },
     isDropdownOpen: false,
+              isDropdownProfileOpen: false,
+
       Profile: new ProfileController(false,false,""),
     };
   },
@@ -76,6 +114,9 @@ export default {
      toggleDropdown(){
       this.isDropdownOpen = !this.isDropdownOpen;
       console.log(this.isDropdownOpen,"status")
+    },
+    toggleDropdownProfile(){
+      this.isDropdownProfileOpen = !this.isDropdownProfileOpen;
     },
     logout() {
       this.loadingStatus = true;

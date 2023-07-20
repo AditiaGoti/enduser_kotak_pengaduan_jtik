@@ -1,31 +1,29 @@
 <template>
-    <div class="mt-24 px-36">  
-    <p class="font-sans text-2xl text-left font-bold mb-4 text-black underline ">Pengaduan Pengguna</p>
+  <div class="mt-24 md:px-36 px-3">
+    <p class="font-sans md:text-2xl text-lg text-left font-bold mb-4 text-black underline">Pengaduan Pengguna</p>
   <div v-if="ComplaintList.length > 0">
 <div v-for="(complaint) in visibleComplaintList" :key="complaint._id" class="mb-4 border-none hover:bg-gray-100" @click="toComplaintDetail(complaint._id)">
     <div class="flex flex-row my-1 hover:bg-gray-100 ">
         <img
         :src="complaint.attachmentImage"
-        class="w-[200px] h-48 m-4 mx-12"
+        class="md:w-[200px] w-32 md:h-48 md:m-4 md:mx-12 mx-3 h-28"
         />
-        <div class="flex flex-col py-3">
-        <p class="text-left font-bold text-lg mb-1">{{ complaint.lecturer_type}} </p>
-        <p class="text-left  font-bold text-xl">
+        <div class="flex flex-col md:py-3 py-0 mb-3">
+        <p class="text-left font-bold md:text-lg text-sm mb-1">{{ complaint.lecturer_type}} </p>
+        <p class="text-left  font-bold md:text-xl text-md">
             {{ complaint.title }}
-          </p>
-          <p class="text-left  font-bold text-xl">
           </p>
           <p class="text-justify mr-2 text-md mt-1 text-ellipsis overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
             {{ complaint.body }}
           </p>
           <div class="flex flex-row mb-2">
-           <p class="text-left text-sm">{{ moment(complaint.createdAt).locale("id").format("DD-MM-YYYY") }}</p>
-           <p class="text-left text-sm relative bottom-0.5 px-2"> | </p>
-           <p class="text-left font-semibold text-sm">
+           <p class="text-left  md:text-sm text-xs">{{ moment(complaint.createdAt).locale("id").format("DD-MM-YYYY") }}</p>
+           <p class="text-left  md:text-sm text-xs relative bottom-0.5 px-2"> | </p>
+           <p class="text-left font-semibold  md:text-sm text-xs">
           {{complaint.category}}
           </p>
           </div>
-          <div class="mb-3 uppercase">
+          <div class="md:mb-3 mb-1 uppercase">
           <div v-if="complaint.status === 'Published'">
           <p class="text-left text-red-600 font-semibold text-sm">
           Belum Ditanggapi

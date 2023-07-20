@@ -3,7 +3,7 @@
     class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow"
   >
     <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+   class="container md:px-4 px-2 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
         class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
@@ -20,6 +20,9 @@
             KOTAK PENGADUAN JTIK
           </a>
         </div>
+         <div class="flex items-center lg:hidden ">
+        <notification/>
+     </div>
        </div>
         </router-link>
         <button
@@ -109,11 +112,11 @@
             </button>
 
           </li>
-          
-          <li class="flex item-center" >
-
-          <notification/>
-          </li>
+          <li class="flex items-center md:block hidden">
+        <div class="mt-3">
+        <notification/>
+        </div>
+       </li>
           <li class="flex item-center" >
             <div v-if="isLoggedIn">
               <dropdown-profile/>
@@ -211,6 +214,8 @@ export default {
       },
       showModal: false,
       notif: "yes",
+            navbarOpen: false,
+
       isLoggedIn: false,
       dropdownPopoverShow: false,
       dropdownPopoverShowLeft: false,
@@ -290,6 +295,8 @@ export default {
     },
       closeModal() {
     this.showModal = false;
+  },setNavbarOpen() {
+    this.navbarOpen = !this.navbarOpen;
   },
     async getNotificationlist(page, size) {
       return this.notif.getNotificationlist(page, size);

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-24 flex flex-col items-center border-none mb-10">
+  <div class="mt-24 md:px-0 px-4 flex flex-col items-center border-none mb-10">
 <div class="w-fit  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-end px-4 pt-4">
     </div>

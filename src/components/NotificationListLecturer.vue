@@ -17,7 +17,8 @@
 
     </button>
     <!-- Dropdown menu -->
-    <div v-if="isDropdownOpen" class="absolute z-50 bottom-0 top-14 w-64 h-10 right-20 max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" >
+    <div 
+    v-if="isDropdownOpen" class="absolute z-50 bottom-0 md:top-14 top-10 w-64 h-10 md:right-20 right-0 max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" >
     <div class="block px-4 py-2 font-bold text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
       Notifications
     </div>

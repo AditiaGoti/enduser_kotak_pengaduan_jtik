@@ -12,12 +12,12 @@
         <div class="bg-blue-800 text-white font-bold rounded shadow" >
         <div class="md:flex md:justify-between mx-9">
           <div class="mb-6 md:mb-0">
-            <div class="flex flex-col text-left mt-5">
+            <div class="flex flex-col text-left md:mt-5">
                 <div>
                   <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" /> -->
-<h1 class="mb-4 text-2xl font-extrabold text-white md:text-2xl lg:text-4xl ml-24"><span class="text-transparent bg-clip-text bg-gradient-to-r to-white from-sky-400 mr-5">KOTAK PENGADUAN</span>JTIK</h1>
+<h1 class="md:mb-4 mb-2 md:mt-0 mt-5 text-lg font-extrabold text-white md:text-2xl lg:text-4xl md:ml-24 ml-3"><span class="text-transparent bg-clip-text bg-gradient-to-r to-white from-sky-400 mr-5">KOTAK PENGADUAN</span>JTIK</h1>
                 </div>
-                <div class="w-[600px] ml-24">
+                <div class="md:w-[600px] md:ml-24 ml-3">
                     <p> Kotak Pengaduan JTIK adalah sebuah wadah yang digunakan untuk menyampaikan segala pengaduan. serta diharapkan dengan adanya pengaduan tersebut dapat meningkatkan kualitas dari Jurusan Teknik Informatika dan Komputer </p>
                 </div>
             </div>

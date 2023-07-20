@@ -1,5 +1,5 @@
 <template>
-  <div class="relative ml-32 mr-10 w-[700px] border-none rounded-lg mb-3">
+  <div class="relative md:ml-32 ml-0 md:mx-0 item-center md:mr-10 mr-0 md:h-fit h-64 md:w-[700px] w-82 border-none rounded-lg mb-3">
    <div class="carousel" data-fb-carousel>
   <!-- Carousel items -->
   <div class="carousel-inner">
@@ -11,25 +11,23 @@
       :class="{ active: index === activeSlide }"
       @click="toComplaintDetail(complaint._id)"
     >
-      <img :src="complaint.attachmentImage" class="block w-full h-[485px]" :alt="complaint.title" />
+      <img :src="complaint.attachmentImage" class="block md:w-full w-82 md:h-[485px] h-64 " :alt="complaint.title" />
       <div class="carousel-caption text-left cursor-pointer" @click="toComplaintDetail(complaint._id)">
-        <h5 class="text-xl">{{ complaint.title }}</h5>
-        <p>{{ complaint.body }}</p>
+        <h5 class="md:text-xl text-sm">{{ complaint.title }}</h5>
+        <p class="md:text-base text-sm">{{ complaint.body }}</p>
       </div>
     </div>
  </div>
  <div v-else>
-  <div class="flex flex-col item-center">
-    <div>
-      <img :src="vote" class="block w-64 px-5 ml-64 mb-2 py-2" :alt="vote" />
-    </div>
-    <div>
-      <!-- <div class="carousel-caption text-left cursor-pointer" @click="toComplaintDetail(complaint._id)"> -->
-      <div class="mb-8 text-xl font-semibold text-black"><p>Belum Terdapat Pengaduan Popular</p></div>
-    <!-- </div> -->
-        <!-- <p>{{ complaint.body }}</p> -->
-      </div>
-    </div>
+  <div class="flex flex-col items-center">
+  <div>
+    <img :src="vote" class="block md:w-64 w-28 mb-2 py-2" :alt="vote" />
+  </div>
+  <div class="mb-8 md:text-xl text-md md:ml-0 font-semibold text-black">
+    <p>Belum Terdapat Pengaduan Populer</p>
+  </div>
+</div>
+
  </div>
   </div>
 

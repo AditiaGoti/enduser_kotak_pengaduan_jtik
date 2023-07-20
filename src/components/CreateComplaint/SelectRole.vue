@@ -1,6 +1,6 @@
 <template>
     <div class="text-left border-none w-[500px] p-4">
-      <ol class="flex items-center w-full p-3 space-x-2 text-sm font-medium mx-4 text-center text-gray-500 bg-white sm:text-base sm:p-1 mb-4 sm:space-x-4">
+        <ol class="flex items-center w-full p-3 ml-14 md:ml-0 space-x-2 text-sm font-medium mx-4 text-center text-gray-500 sm:text-base sm:p-1 mb-4 sm:space-x-4">
     <li class="flex items-center">
         
       <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0">
@@ -25,11 +25,11 @@
     </li>
 </ol>
 
-        <p class="font-bold text-md my-3"> Kepada Siapa Pengaduan diajukan ? </p>
-        <p class="mb-3"> Pilih jabatan yang ditujukan dalam penyampaian pengaduan</p>
-        <div>
+        <p class="font-bold text-md md:mx-0 mx-14 my-3"> Kepada Siapa Pengaduan diajukan ? </p>
+        <p class="mb-3 md:mx-0 mx-14 "> Pilih jabatan yang ditujukan dalam penyampaian pengaduan</p>
+        <div class="md:mx-0 mx-14">
 <select id="countries" v-model="lecturer_type" @change="emitSelectedRole" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 menu">
-  <option v-for="admin in adminList" :key="admin._id" :value="admin._id">{{ admin.name }}</option>
+  <option class="md:text-md text-xs" v-for="admin in adminList" :key="admin._id" :value="admin._id">{{ admin.name }}</option>
 </select>
 
         </div>

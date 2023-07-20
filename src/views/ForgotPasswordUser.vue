@@ -120,6 +120,16 @@
           setTimeout(() => {
             toastContainer.removeChild(toast);
           }, 2000);       }
+          else if(this.errorCause === "Email tidak ditemukan!"){
+          this.errorMessage = "Email tidak ditemukan!";
+          const toast = document.createElement("div");
+          toast.className = "toast toast-error";
+          toast.innerHTML = this.errorMessage;
+          const toastContainer = document.querySelector(".toast-container");
+          toastContainer.appendChild(toast);
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 2000);       }
 
           else {
               this.errorMessage = "Terjadi Kesalahan Pada Sistem";

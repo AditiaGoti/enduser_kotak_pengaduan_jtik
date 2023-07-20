@@ -3,7 +3,7 @@
  class="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow"
 >
  <div
-   class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+   class="container md:px-4 px-2 mx-auto flex flex-wrap items-center justify-between"
  >
    <div
      class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
@@ -11,7 +11,7 @@
            <router-link to="/">
     <div class="flex flex-row">
      <div>
-           <img :src="vote" class="w-8 h-8 mr-1"/>
+           <img :src="vote" class="w-8 h-8 md:mr-1 mr-2"/>
      </div>
      <div>
        <a
@@ -19,6 +19,9 @@
        >
          KOTAK PENGADUAN JTIK
        </a>
+     </div>
+     <div class="flex items-center lg:hidden ">
+        <notification/>
      </div>
     </div>
      </router-link>
@@ -48,7 +51,7 @@
            <i
              class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
            />
-           Keluhan
+           Pengaduan
          </a>
        </li>
 </router-link>
@@ -77,8 +80,10 @@
             </button>
          </router-link>
        </li>
-       <li class="flex items-center">
+       <li class="flex items-center md:block hidden">
+        <div class="mt-3">
         <notification/>
+        </div>
        </li>
        <li class="flex item-center" >
          <div class="flex items-center md:order-2" v-if="isLoggedIn">
@@ -175,6 +180,7 @@ data() {
      size: "",
    },
   showModal: false,
+      navbarOpen: false,
    notif: "yes",
    notif: new NotificationController(false, false, ""),
    Profile: new ProfileController(false,false,""),
@@ -203,6 +209,9 @@ mounted() {
 this.getProfileLecturer();
 },
 methods: {
+   setNavbarOpen() {
+    this.navbarOpen = !this.navbarOpen;
+  },
      logout() {
       this.loadingStatus = true;
       setTimeout(removeAuth(), 3500);
